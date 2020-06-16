@@ -15,3 +15,5 @@ Route::get('/admin/login','Admin\LoginController@login');
 Route::post('/admin/login/auth','Admin\LoginController@auth');
 
 Route::get('/admin/dashboard','Admin\DashboardController@index');
+
+Route::get('/','Front\HomeController@index');
