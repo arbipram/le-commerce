@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin/login','Admin\LoginController@login');
+Route::post('/admin/login/auth','Admin\LoginController@auth');
+
+Route::get('/admin/dashboard','Admin\DashboardController@index');
