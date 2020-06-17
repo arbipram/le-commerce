@@ -13,9 +13,22 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['customers'] = Customer::latest()->get();
+        if(!empty($request->keyword)){
+            $data['customers'] = Customer::where('first_name','like','%'.$request->keyword.'%')
+                ->orWhere('last_name','like','%'.$request->keyword.'%')
+                ->orWhere('last_name','like','%'.$request->keyword.'%')
+                ->orWhere('email','like','%'.$request->keyword.'%')
+                ->orWhere('phone_number','like','%'.$request->keyword.'%')
+                ->orWhere('country','like','%'.$request->keyword.'%')
+                ->orWhere('postcode','like','%'.$request->keyword.'%')
+                ->orWhere('city','like','%'.$request->keyword.'%')
+                ->orWhere('state','like','%'.$request->keyword.'%')
+                ->paginate(25);
+        } else {
+            $data['customers'] = Customer::latest()->paginate(25);
+        }
         return view('admin.customers.index',$data);
     }
 

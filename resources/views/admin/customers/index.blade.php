@@ -22,7 +22,8 @@
             </div>
             <div class="col-md-3 mb-3">
                 <form action="#" method="get">
-                    <div class="input-group"><input type="text" class="form-control">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="keyword" value="@if(!empty($_REQUEST['keyword'])){{$_REQUEST['keyword']}}@endif">
                         <div class="input-group-append">
                             @csrf
                             <button class="btn btn-secondary">Search</button>
@@ -49,25 +50,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($customers as $i => $customer)
-                                <tr>
-                                    <td> {{$i+1}}</td>
-                                    <td> {{$customer->first_name.' '.$customer->last_name}}</td>
-                                    <td> {{$customer->email}}</td>
-                                    <td> {{$customer->country}}</td>
-                                    <td> {{$customer->state}}</td>
-                                    <td> {{$customer->city}}</td>
-                                    <td> {{$customer->postcode}}</td>
-                                    <td>
-                                        <a href="{{url('/admin/customers/edit/'.$customer->id)}}" class="btn btn-info">Edit</a>
-                                        <a href="{{url('/admin/customers/delete/'.$customer->id)}}" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                @if(!empty($customers))
+                                    @foreach($customers as $i => $customer)
+                                    <tr>
+                                        <td> {{$i+1}}</td>
+                                        <td> {{$customer->first_name.' '.$customer->last_name}}</td>
+                                        <td> {{$customer->email}}</td>
+                                        <td> {{$customer->country}}</td>
+                                        <td> {{$customer->state}}</td>
+                                        <td> {{$customer->city}}</td>
+                                        <td> {{$customer->postcode}}</td>
+                                        <td>
+                                            <a href="{{url('/admin/customers/edit/'.$customer->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="{{url('/admin/customers/delete/'.$customer->id)}}" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
                 </div>
+                {{$customers->links()}}
             </div>
         </div>
     </div>
