@@ -13,5 +13,6 @@
         </div>
     </div>
     @include('admin.partials.scripts')
+    @yield('scripts')
 </body>
 </html>
