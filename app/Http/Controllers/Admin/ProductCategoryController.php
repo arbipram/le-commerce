@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\ProductCategory;
 
 class ProductCategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['product_categories'] = ProductCategory::latest()->get();
+        return view('admin.product-categories.index',$data);
     }
 
     /**
@@ -24,7 +27,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product-categories.create');
     }
 
     /**
@@ -35,7 +38,20 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product_category = new ProductCategory;
+        foreach($request->meta as $meta => $value){
+            $product_category->$meta = $value;
+        };
+        
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['image'];
+            $imageName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $imageName);
+            $product_category->image = $imageName;
+        }
+        
+        $product_category->save();
+        return redirect('admin/product-categories');
     }
 
     /**
@@ -57,7 +73,8 @@ class ProductCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['product_category'] = ProductCategory::find($id);
+        return view('admin.product-categories.edit',$data);
     }
 
     /**
@@ -69,7 +86,20 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_category = ProductCategory::find($id);
+        foreach($request->meta as $meta => $value){
+            $product_category->$meta = $value;
+        };
+        
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['image'];
+            $imageName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $imageName);
+            $product_category->image = $imageName;
+        }
+        
+        $product_category->save();
+        return redirect('admin/product-categories');
     }
 
     /**
@@ -80,6 +110,7 @@ class ProductCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ProductCategory::find($id)->delete();
+        return redirect('admin/product-categories');
     }
 }

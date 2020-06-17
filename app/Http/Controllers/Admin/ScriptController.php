@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Script;
 
 class ScriptController extends Controller
 {
@@ -14,7 +15,8 @@ class ScriptController extends Controller
      */
     public function index()
     {
-        //
+        $data['scripts'] = Script::latest()->get();
+        return view('admin.scripts.index',$data);
     }
 
     /**
@@ -24,7 +26,7 @@ class ScriptController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.scripts.create');        
     }
 
     /**
@@ -35,7 +37,12 @@ class ScriptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $script = new Script;
+        foreach($request->meta as $meta => $value){
+            $script->$meta = $value;
+        };
+        $script->save();
+        return redirect('admin/scripts');
     }
 
     /**
@@ -57,7 +64,8 @@ class ScriptController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['script'] = Script::find($id);
+        return view('admin.scripts.edit',$data);        
     }
 
     /**
@@ -69,7 +77,12 @@ class ScriptController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $script = Script::find($id);
+        foreach($request->meta as $meta => $value){
+            $script->$meta = $value;
+        };
+        $script->save();
+        return redirect('admin/scripts');
     }
 
     /**
@@ -80,6 +93,7 @@ class ScriptController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Script::find($id)->delete();
+        return redirect('admin/scripts');
     }
 }

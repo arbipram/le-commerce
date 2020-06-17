@@ -17,26 +17,26 @@
             </div>
         </div>           
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9 mb-3">
                 <a href="{{url('/admin/customers/create')}}" class="btn btn-success">Create</a>
             </div>
             <div class="col-md-3 mb-3">
                 <form action="#" method="get">
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <input type="text" class="form-control" name="keyword" value="@if(!empty($_REQUEST['keyword'])){{$_REQUEST['keyword']}}@endif">
                         <div class="input-group-append">
                             @csrf
                             <button class="btn btn-secondary">Search</button>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
-                    <div class="table-responsive">
-                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <div class="table-responsive" style="padding:10px">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover" id="example">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -71,10 +71,12 @@
                         </table>
                     </div>
                 </div>
-                {{$customers->links()}}
             </div>
         </div>
     </div>
     @include('admin.partials.footer')
 </div>
+@stop
+
+@section('script')
 @stop

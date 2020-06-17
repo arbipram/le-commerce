@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\Media;
 
 class MediaController extends Controller
 {
@@ -14,7 +16,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        //
+        $data['medias'] = Media::latest()->get();
+        return view('admin.medias.index',$data);
     }
 
     /**
@@ -24,7 +27,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.medias.create');        
     }
 
     /**
@@ -35,7 +38,18 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $media = new Media;
+        foreach($request->meta as $meta => $value){
+            $media->$meta = $value;
+        };
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['file'];
+            $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $fileName);
+            $media->file = $fileName;
+        }
+        $media->save();
+        return redirect('admin/medias');
     }
 
     /**
@@ -57,7 +71,8 @@ class MediaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['media'] = Media::find($id);
+        return view('admin.medias.edit',$data);        
     }
 
     /**
@@ -69,7 +84,18 @@ class MediaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $media = Media::find($id);
+        foreach($request->meta as $meta => $value){
+            $media->$meta = $value;
+        };
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['file'];
+            $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $fileName);
+            $media->file = $fileName;
+        }
+        $media->save();
+        return redirect('admin/medias');
     }
 
     /**
@@ -80,6 +106,7 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Media::find($id)->delete();
+        return redirect('admin/medias');
     }
 }

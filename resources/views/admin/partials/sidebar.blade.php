@@ -85,7 +85,7 @@
                 </li>
                 <li class="app-sidebar__heading">Frontend</li>
                 <li>
-                   <a href="{{url('admin/banner')}}" class="@if(Request::segment(2)=='banner') mm-active @else @endif">
+                   <a href="{{url('admin/banners')}}" class="@if(Request::segment(2)=='banners') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-photo-gallery"></i>
                         Banner
                     </a>
@@ -103,7 +103,7 @@
                     </a>
                 </li>
                 <li>
-                   <a href="{{url('admin/widget')}}" class="@if(Request::segment(2)=='widget') mm-active @else @endif">
+                   <a href="{{url('admin/widgets')}}" class="@if(Request::segment(2)=='widgets') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-keypad"></i>
                         Widgets
                     </a>

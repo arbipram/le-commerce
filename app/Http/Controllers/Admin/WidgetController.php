@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Widget;
 
 class WidgetController extends Controller
 {
@@ -14,7 +15,8 @@ class WidgetController extends Controller
      */
     public function index()
     {
-        //
+        $data['widgets'] = Widget::latest()->get();
+        return view('admin.widgets.index',$data);
     }
 
     /**
@@ -24,7 +26,7 @@ class WidgetController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.widgets.create');        
     }
 
     /**
@@ -35,7 +37,12 @@ class WidgetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $widget = new Widget;
+        foreach($request->meta as $meta => $value){
+            $widget->$meta = $value;
+        };
+        $widget->save();
+        return redirect('admin/widgets');
     }
 
     /**
@@ -57,7 +64,8 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['widget'] = Widget::find($id);
+        return view('admin.widgets.edit',$data);        
     }
 
     /**
@@ -69,7 +77,12 @@ class WidgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $widget = Widget::find($id);
+        foreach($request->meta as $meta => $value){
+            $widget->$meta = $value;
+        };
+        $widget->save();
+        return redirect('admin/widgets');
     }
 
     /**
@@ -80,6 +93,7 @@ class WidgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Widget::find($id)->delete();
+        return redirect('admin/widgets');
     }
 }
