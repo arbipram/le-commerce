@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data['users'] = User::latest()->get();
+        return view('admin.users.index',$data);
     }
 
     /**
@@ -24,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');        
     }
 
     /**
@@ -35,7 +38,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = new User;
+        foreach($request->meta as $meta => $value){
+            $users->$meta = $value;
+        };
+        $users->password = bcrypt($request->meta["password"]);
+        $users->save();
+        return redirect('admin/users');
     }
 
     /**
@@ -57,7 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['user'] = User::find($id);
+        return view('admin.users.edit',$data);        
     }
 
     /**
@@ -69,7 +79,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::find($id);
+        $password = $users->password;
+
+        foreach($request->meta as $meta => $value){
+            $users->$meta = $value;
+        };
+        if(!empty($request->meta['password'])){
+            $users->password = $request->meta['password'];
+        } else {
+            $users->password = bcrypt($password);
+        }
+        $users->save();
+        return redirect('admin/users');
     }
 
     /**
@@ -80,6 +102,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect('admin/users');
     }
 }

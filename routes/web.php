@@ -23,6 +23,13 @@ Route::get('/admin/customers/edit/{id}','Admin\CustomerController@edit');
 Route::post('/admin/customers/update/{id}','Admin\CustomerController@update');
 Route::get('/admin/customers/delete/{id}','Admin\CustomerController@destroy');
 
+Route::get('/admin/products','Admin\ProductController@index');
+Route::get('/admin/products/create','Admin\ProductController@create');
+Route::post('/admin/products/store','Admin\ProductController@store');
+Route::get('/admin/products/edit/{id}','Admin\ProductController@edit');
+Route::post('/admin/products/update/{id}','Admin\ProductController@update');
+Route::get('/admin/products/delete/{id}','Admin\ProductController@destroy');
+
 Route::get('/admin/product-categories','Admin\ProductCategoryController@index');
 Route::get('/admin/product-categories/create','Admin\ProductCategoryController@create');
 Route::post('/admin/product-categories/store','Admin\ProductCategoryController@store');
@@ -64,5 +71,14 @@ Route::post('/admin/widgets/store','Admin\WidgetController@store');
 Route::get('/admin/widgets/edit/{id}','Admin\WidgetController@edit');
 Route::post('/admin/widgets/update/{id}','Admin\WidgetController@update');
 Route::get('/admin/widgets/delete/{id}','Admin\WidgetController@destroy');
+
+Route::get('/admin/users','Admin\UserController@index');
+Route::get('/admin/users/create','Admin\UserController@create');
+Route::post('/admin/users/store','Admin\UserController@store');
+Route::get('/admin/users/edit/{id}','Admin\UserController@edit');
+Route::post('/admin/users/update/{id}','Admin\UserController@update');
+Route::get('/admin/users/delete/{id}','Admin\UserController@destroy');
+
+
 
 Route::get('/','Front\HomeController@index');

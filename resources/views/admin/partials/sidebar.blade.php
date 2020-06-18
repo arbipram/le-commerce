@@ -66,7 +66,7 @@
                 </li>
                 <li class="app-sidebar__heading">Products</li>
                 <li>
-                    <a href="{{url('admin/products')}}" class="@if(Request::segment(2)=='products') mm-active @else @endif">
+                    <a href="{{url('admin/products')}}" class="@if(Request::segment(2)=='products' && Request::segment(3)=='') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-shopbag"></i>
                         All Products
                     </a>
