@@ -99,7 +99,7 @@
                     <div class="position-relative form-group">
                         <label class="">Status</label>
                         <select name="product[status]"id="" class="form-control">
-                            <option value="{$product->status}}">{{$product->status}}</option>
+                            <option value="{{$product->status}}">{{$product->status}}</option>
                             <option value="Draft">Draft</option>
                             <option value="Publish">Publish</option>
                         </select>
@@ -119,8 +119,8 @@
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
                     @for($i=1;$i <= 4;$i++)
-                    <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
-                    <input type="file" name="image[]" class="form-control">
+                        <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
+                        <input type="file" name="image_{{$i}}" class="form-control">
                     @endfor
                 </div>
             </div>

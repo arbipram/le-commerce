@@ -117,10 +117,9 @@
                 </div>
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
-                    <input type="file" name="image[]" class="form-control">
-                    <input type="file" name="image[]" class="form-control">
-                    <input type="file" name="image[]" class="form-control">
-                    <input type="file" name="image[]" class="form-control">
+                    @for($i=1; $i <= 4;$i++)
+                        <input type="file" name="image[]" class="form-control">
+                    @endfor
                 </div>
             </div>
         </div>

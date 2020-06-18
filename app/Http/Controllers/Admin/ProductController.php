@@ -117,18 +117,43 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $media = Media::find($id);
-        foreach($request->meta as $meta => $value){
-            $media->$meta = $value;
-        };
-        if ($request->hasFile('meta')) {
-            $image = $request->meta['file'];
-            $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
-            $image->move('uploads/', $fileName);
-            $media->file = $fileName;
+        DB::beginTransaction();
+        try{
+            $product = Product::find($id);
+            foreach($request->product as $key => $value){
+                $product->$key = $value;
+            };
+            $product->save();
+
+            foreach($request->meta as $key => $value){
+                $meta = ProductMeta::where('meta_key',$key)->first();
+                $meta->products_id = $product->id;
+                $meta->meta_key = $key;
+                $meta->meta_value = $value;
+                $meta->save();
+            };
+
+            for($i=1;$i <= 4; $i++){
+                $key = "image_".$i;
+                if ($request->hasFile($key)) {
+                    $images = ProductMeta::where('meta_key',$key)->first();
+                    $images->products_id = $product->id;
+                    $images->meta_key = $key;
+                        //upload images
+                        $image = $request->$key;
+                        $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+                        $image->move('uploads/', $fileName);
+                    $images->meta_value = $fileName;
+                    $images->save();
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e);
+            // something went wrong
         }
-        $media->save();
-        return redirect('admin/medias');
+        return redirect('admin/products');
     }
 
     /**
