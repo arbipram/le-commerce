@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\Page;
 
 class PageController extends Controller
 {
@@ -14,7 +16,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        $data['pages'] = Page::latest()->get();
+        return view('admin.pages.index',$data);
     }
 
     /**
@@ -24,7 +27,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.create');        
     }
 
     /**
@@ -35,7 +38,18 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $page = new Page;
+        foreach($request->meta as $meta => $value){
+            $page->$meta = $value;
+        };
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['image'];
+            $imageName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $imageName);
+            $page->image = $imageName;
+        }
+        $page->save();
+        return redirect('admin/pages');
     }
 
     /**
@@ -57,7 +71,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page'] = Page::find($id);
+        return view('admin.pages.edit',$data);        
     }
 
     /**
@@ -69,7 +84,18 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $page = Page::find($id);
+        foreach($request->meta as $meta => $value){
+            $page->$meta = $value;
+        };
+        if ($request->hasFile('meta')) {
+            $image = $request->meta['image'];
+            $imageName = Str::random(30).'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/', $imageName);
+            $page->image = $imageName;
+        }
+        $page->save();
+        return redirect('admin/pages');
     }
 
     /**
@@ -80,6 +106,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Page::find($id)->delete();
+        return redirect('admin/pages');
     }
 }

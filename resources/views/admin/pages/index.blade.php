@@ -6,10 +6,10 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="pe-7s-photo-gallery icon-gradient bg-mean-fruit">
+                        <i class="pe-7s-file icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Banners
+                    <div>Pages
                         <div class="page-title-subheading">
                         </div>
                     </div>
@@ -18,7 +18,7 @@
         </div>           
         <div class="row">
             <div class="col-md-9 mb-3">
-                <a href="{{url('/admin/banners/create')}}" class="btn btn-success">Create</a>
+                <a href="{{url('/admin/pages/create')}}" class="btn btn-success">Create</a>
             </div>
             <div class="col-md-3 mb-3">
             </div>
@@ -31,31 +31,23 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>H5</th>
-                                    <th>H1</th>
-                                    <th>Image</th>
-                                    <th>Button Text</th>
-                                    <th>Button Link</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($banners))
-                                    @foreach($banners as $i => $banner)
+                                @if(!empty($pages))
+                                    @foreach($pages as $i => $page)
                                     <tr>
                                         <td> {{$i+1}}</td>
-                                        <td>{{$banner->name}}</td>
-                                        <td>{{$banner->h5}}</td>
-                                        <td>{{$banner->h1}}</td>
-                                        <td> <img src="{{url('/uploads/'.$banner->image)}}" width="200px" height="100px"></td>
-                                        <td>{{$banner->button_text}}</td>
-                                        <td>{{$banner->button_link}}</td>
-                                        <td>{{$banner->status}}</td>
+                                        <td> {{$page->title}}</td>
+                                        <td> {{$page->author}}</td>
+                                        <td> {{$page->status}}</td>
                                         <td>
-                                            <a href="{{url('/admin/banners/edit/'.$banner->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="{{url('/admin/banners/delete/'.$banner->id)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/admin/pages/edit/'.$page->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="{{url('/admin/pages/delete/'.$page->id)}}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

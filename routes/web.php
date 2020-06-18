@@ -44,6 +44,13 @@ Route::get('/admin/medias/edit/{id}','Admin\MediaController@edit');
 Route::post('/admin/medias/update/{id}','Admin\MediaController@update');
 Route::get('/admin/medias/delete/{id}','Admin\MediaController@destroy');
 
+Route::get('/admin/pages','Admin\PageController@index');
+Route::get('/admin/pages/create','Admin\PageController@create');
+Route::post('/admin/pages/store','Admin\PageController@store');
+Route::get('/admin/pages/edit/{id}','Admin\PageController@edit');
+Route::post('/admin/pages/update/{id}','Admin\PageController@update');
+Route::get('/admin/pages/delete/{id}','Admin\PageController@destroy');
+
 Route::get('/admin/scripts','Admin\ScriptController@index');
 Route::get('/admin/scripts/create','Admin\ScriptController@create');
 Route::post('/admin/scripts/store','Admin\ScriptController@store');
