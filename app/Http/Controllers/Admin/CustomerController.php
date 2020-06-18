@@ -64,7 +64,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $url="https://gist.githubusercontent.com/ebaranov/41bf38fdb1a2cb19a781/raw/fb097a60427717b262d5058633590749f366bd80/gistfile1.json";
+        $url=url('/json/countries.json');
         $countries = json_decode(file_get_contents($url));
         $data['customer'] = Customer::find($id);
         $data['countries'] = $countries->countries;

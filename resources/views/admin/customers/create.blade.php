@@ -53,10 +53,10 @@
 @section('scripts')
 <script>
 $.ajax({
-  url: "https://gist.githubusercontent.com/ebaranov/41bf38fdb1a2cb19a781/raw/fb097a60427717b262d5058633590749f366bd80/gistfile1.json",
+  url: "{{url('/json/countries.json')}}",
   type: "get", // Jika GET "POST" diubah jadi "GET"
   success: function(res){
-      var country = JSON.parse(res).countries
+      var country = res.countries
       for (let index = 0; index < country.length; index++) {
         $('#country').append(`<option value=`+country[index].country+` selected="selected">`+country[index].country+`</option>`);
       }
@@ -66,10 +66,10 @@ $.ajax({
 $("#country").change(function(){
     $("#state option").remove();
     $.ajax({
-    url: "https://gist.githubusercontent.com/ebaranov/41bf38fdb1a2cb19a781/raw/fb097a60427717b262d5058633590749f366bd80/gistfile1.json",
+    url: "{{url('/json/countries.json')}}",
     type: "get", // Jika GET "POST" diubah jadi "GET"
     success: function(res){
-            var country = JSON.parse(res).countries
+            var country = res.countries
             var states = country.filter(function(state) {
                 return state.country == ($("#country").val()) ;
             });
