@@ -99,7 +99,7 @@
                     <div class="position-relative form-group">
                         <label class="">Status</label>
                         <select name="product[status]"id="" class="form-control">
-                            <option value="{$product->status}}">{$product->status}}</option>
+                            <option value="{$product->status}}">{{$product->status}}</option>
                             <option value="Draft">Draft</option>
                             <option value="Publish">Publish</option>
                         </select>
