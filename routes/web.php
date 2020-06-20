@@ -79,6 +79,10 @@ Route::get('/admin/users/edit/{id}','Admin\UserController@edit');
 Route::post('/admin/users/update/{id}','Admin\UserController@update');
 Route::get('/admin/users/delete/{id}','Admin\UserController@destroy');
 
-
+Route::get('/admin/store/settings','Admin\StoreSettingController@index');
+Route::get('/admin/store/settings/payment-cod','Admin\StoreSettingController@paymentCod');
+Route::get('/admin/store/settings/payment-direct-bank-transfer','Admin\StoreSettingController@paymentDirectBankTransfer');
+Route::post('/admin/store/settings/payment-direct-bank-transfer','Admin\StoreSettingController@storePaymentDirectBankTransfer');
+Route::post('/admin/store/settings/store','Admin\StoreSettingController@store');
 
 Route::get('/','Front\HomeController@index');
