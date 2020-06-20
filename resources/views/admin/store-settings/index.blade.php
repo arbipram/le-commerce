@@ -22,12 +22,12 @@
                     <div class="card-body">
                         <h5 class="card-title">Store Settings</h5>
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="nav-item"><a data-toggle="tab" href="#general" class="nav-link ">General</a></li>
+                            <li class="nav-item"><a data-toggle="tab" href="#general" class="nav-link active">General</a></li>
                             <li class="nav-item"><a data-toggle="tab" href="#product" class="nav-link ">Product</a></li>
-                            <li class="nav-item"><a data-toggle="tab" href="#payment" class="nav-link active">Payment</a></li>
+                            <li class="nav-item"><a data-toggle="tab" href="#payment" class="nav-link ">Payment</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane " id="general" role="tabpanel">
+                            <div class="tab-pane active" id="general" role="tabpanel">
                                 <form action="{{url('admin/store/settings/store')}}" method="post">
                                     <input name="type" value="general" type="hidden" class="form-control">
                                     <div class="position-relative form-group">
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane active" id="payment" role="tabpanel" style="overflow-x:scroll">
+                            <div class="tab-pane" id="payment" role="tabpanel" style="overflow-x:scroll">
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <th>Payment Method</th>

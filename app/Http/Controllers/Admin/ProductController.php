@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\ProductMeta;
 use App\Models\ProductCategory;
+use App\Models\StoreSetting;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -31,6 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $data['max_product_image'] = StoreSetting::where('type','product-general')->where('meta_key','max_product_image')->first();
         $data['products_categories'] = ProductCategory::get();
         return view('admin.products.create',$data);        
     }
@@ -105,6 +107,7 @@ class ProductController extends Controller
         $data['product'] = Product::find($id);
         $data['meta'] = ProductMeta::where('products_id',$id)->get();
         $data['products_categories'] = ProductCategory::get();
+        $data['max_product_image'] = StoreSetting::where('type','product-general')->where('meta_key','max_product_image')->first();
         return view('admin.products.edit',$data);        
     }
 

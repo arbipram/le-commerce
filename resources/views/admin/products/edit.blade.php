@@ -118,10 +118,17 @@
                 </div>
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
-                    @for($i=1;$i <= 4;$i++)
-                        <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
-                        <input type="file" name="image_{{$i}}" class="form-control">
-                    @endfor
+                    @if(!empty($max_product_image))
+                        @for($i=1; $i <= $max_product_image->meta_value ;$i++)
+                            <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
+                            <input type="file" name="image[]" class="form-control">
+                        @endfor
+                    @else
+                        @for($i=1;$i <= 4;$i++)
+                            <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
+                            <input type="file" name="image_{{$i}}" class="form-control">
+                        @endfor
+                    @endif
                 </div>
             </div>
         </div>
