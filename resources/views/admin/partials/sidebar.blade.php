@@ -122,7 +122,7 @@
                     </a>
                 </li>
                 <li>
-                   <a href="{{url('admin/settings/general')}}" class="@if(Request::segment(2)=='settings' && Request::segment(3)=='general') mm-active @else @endif">
+                   <a href="{{url('admin/settings')}}" class="@if(Request::segment(2)=='settings') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-config"></i>
                         General
                     </a>

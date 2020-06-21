@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\Setting;
 
 class SettingController extends Controller
 {
@@ -14,7 +16,9 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $data['general'] = Setting::where('type','general')->get();
+        $data['social_media'] = Setting::where('type','social-media')->get();
+        return view('admin.settings.index',$data);
     }
 
     /**
@@ -35,7 +39,26 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request->meta as $key => $value){
+            $setting = Setting::where('meta_key',$key)->first();
+            if(!empty($setting)){
+                $setting->type = $request->type;
+                $setting->meta_key = $key;
+                $setting->meta_value = $value;
+                $setting->save();
+                
+            } else {
+                $setting = new Setting;
+                $setting->type = $request->type;
+                $setting->meta_key = $key;
+                $setting->meta_value = $value;
+
+                $setting->save();
+            }
+        }
+
+
+        return redirect('admin/settings');
     }
 
     /**

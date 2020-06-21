@@ -85,4 +85,7 @@ Route::get('/admin/store/settings/payment-direct-bank-transfer','Admin\StoreSett
 Route::post('/admin/store/settings/payment-direct-bank-transfer','Admin\StoreSettingController@storePaymentDirectBankTransfer');
 Route::post('/admin/store/settings/store','Admin\StoreSettingController@store');
 
+Route::get('/admin/settings','Admin\SettingController@index');
+Route::post('/admin/settings/store','Admin\SettingController@store');
+
 Route::get('/','Front\HomeController@index');
