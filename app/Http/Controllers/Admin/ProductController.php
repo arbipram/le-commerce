@@ -136,16 +136,24 @@ class ProductController extends Controller
                 $meta->save();
             };
 
-            for($i=1;$i <= 4; $i++){
-                $key = "image_".$i;
-                if ($request->hasFile($key)) {
-                    $images = ProductMeta::where('meta_key',$key)->first();
+            foreach($request->image as $key => $value){
+                $key = $key+1;
+                $images = ProductMeta::where('meta_key',"image_".$key)->first();
+                if(!empty($images)){
                     $images->products_id = $product->id;
-                    $images->meta_key = $key;
-                        //upload images
-                        $image = $request->$key;
-                        $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
-                        $image->move('uploads/', $fileName);
+                    $images->meta_key = "image_".$key;
+                    $image = $request->image[$key];
+                    $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+                    $image->move('uploads/', $fileName);
+                    $images->meta_value = $fileName;
+                    $images->save();
+                } else {
+                    $images = new ProductMeta;
+                    $images->products_id = $product->id;
+                    $images->meta_key = "image_".$key;
+                    $image = $request->image[$key-1]; // array starts from 0
+                    $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+                    $image->move('uploads/', $fileName);
                     $images->meta_value = $fileName;
                     $images->save();
                 }
