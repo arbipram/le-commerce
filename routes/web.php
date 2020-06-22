@@ -24,6 +24,7 @@ Route::post('/admin/customers/update/{id}','Admin\CustomerController@update');
 Route::get('/admin/customers/delete/{id}','Admin\CustomerController@destroy');
 
 Route::get('/admin/products','Admin\ProductController@index');
+Route::get('/admin/products/{id}.json','Admin\ProductController@getJson');
 Route::get('/admin/products/create','Admin\ProductController@create');
 Route::post('/admin/products/store','Admin\ProductController@store');
 Route::get('/admin/products/edit/{id}','Admin\ProductController@edit');
@@ -87,5 +88,10 @@ Route::post('/admin/store/settings/store','Admin\StoreSettingController@store');
 
 Route::get('/admin/settings','Admin\SettingController@index');
 Route::post('/admin/settings/store','Admin\SettingController@store');
+
+Route::get('/admin/orders','Admin\OrderController@index');
+Route::get('/admin/orders/create','Admin\OrderController@create');
+Route::post('/admin/orders/store','Admin\OrderController@store');
+Route::get('/admin/orders/delete/{id}','Admin\OrderController@destroy');
 
 Route::get('/','Front\HomeController@index');

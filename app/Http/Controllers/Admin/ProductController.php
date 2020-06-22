@@ -179,4 +179,10 @@ class ProductController extends Controller
         ProductMeta::where('products_id',$id)->delete();
         return redirect('admin/products');
     }
+
+    public function getJson($id)
+    {
+        $product = Product::find($id);
+        return $product->meta;
+    }
 }
