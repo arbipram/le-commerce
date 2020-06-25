@@ -16,7 +16,7 @@
                 </div> 
             </div>
         </div>           
-        <form action="{{url('admin/orders/store')}}" method="post">
+        <form action="{{url('admin/orders/update/'.$order->id)}}" method="post">
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <h5 class="card-title">Orders</h5>
@@ -25,11 +25,12 @@
                         <h6>General</h6>
                         <div class="position-relative form-group">
                             <label class="">Date</label>
-                            <input name="order[date]" type="date" class="form-control">
+                            <input name="order[date]" type="date" class="form-control" value="{{$order->date}}">
                         </div>
                         <div class="position-relative form-group">
                             <label for="">Status</label>
                             <select name="order[status]" class="form-control">
+                            <option value="{{$order->status}}">{{$order->status}}</option>
                                 <option value="Pending Payment">Pending Payment</option>
                                 <option value="Processing">Processing</option>
                                 <option value="On Hold">On Hold</option>
@@ -41,6 +42,7 @@
                         <div class="position-relative form-group">
                             <label for="">Payment Method</label>
                             <select name="order[payment_method]" class="form-control">
+                                <option value="{{$order->payment_method}}">{{$order->payment_method}}</option>
                                 <option value="Direct Bank Transfer">Direct Bank Transfer</option>
                                 <option value="Cash On Delivery">Cash On Delivery</option>
                             </select>
@@ -52,34 +54,34 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">First Name</label>
-                                    <input name="customer[first_name]" type="text" class="form-control">
+                                    <input name="customer[first_name]" value="{{$customer->first_name}}" readonly type="text" class="form-control">
                                 </div>        
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Last Name</label>
-                                    <input name="customer[last_name]" type="text" class="form-control">
+                                    <input name="customer[last_name]" value="{{$customer->last_name}}" readonly type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="position-relative form-group">
                             <label class="">Address</label>
-                            <textarea name="customer[address]" id="" cols="30" rows="4" class="form-control"></textarea>
+                            <textarea name="customer[address]" readonly id="" cols="30" rows="4" class="form-control"> {{$customer->address}} </textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Country</label>
-                                    <select name="customer[country]" id="country" class="form-control">
-                                        <option value=""></option>
+                                    <select name="customer[country]" readonly id="country" class="form-control">
+                                        <option value="{{$customer->country}}" selected>{{$customer->country}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">State</label>
-                                    <select name="customer[state]" id="state" class="form-control">
-                                        <option value=""></option>
+                                    <select name="customer[state]" readonly id="state" class="form-control">
+                                        <option value="{{$customer->state}}">{{$customer->state}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,13 +90,13 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">City</label>
-                                    <input name="customer[city]" type="text" class="form-control">
+                                    <input name="customer[city]" value="{{$customer->city}}" readonly type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Postcode</label>
-                                    <input name="customer[postcode]" type="text" class="form-control">
+                                    <input name="customer[postcode]" value="{{$customer->postcode}}" readonly type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -102,13 +104,13 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Phone Number</label>
-                                    <input name="customer[phone_number]" type="text" class="form-control">
+                                    <input name="customer[phone_number]" value="{{$customer->phone_number}}" readonly type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Email</label>
-                                    <input name="customer[email]" type="text" class="form-control">
+                                    <input name="customer[email]" value="{{$customer->email}}" readonly type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -131,6 +133,29 @@
                                 <th>Action</th>
                             </thead>
                             <tbody id="showProduct">
+                                @foreach($orders_meta->product_id as $i => $meta)
+                                    @php
+                                        $product = \App\Models\Product::find($meta);
+                                    @endphp
+                                    <tr id="tr_{{$i}}" class="lengthtr">
+                                        <td>
+                                            <input type="hidden" name="old_product[product_id][]" id="op_pid{{$i}}" class="form-control" value="{{$product->id}}">
+                                            <select name="product[product_id][]" onchange="productChange({{$i}})" id="product_id_{{$i}}`" class="form-control">
+                                                <option value="{{$product->id}}">{{$product->name}}</option>
+                                                @foreach($products as $j => $product)
+                                                    <option value="{{$product->id}}">{{$product->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td> <input type="text" name="product[price][]" class="form-control" id="price_{{$i}}" value="{{$orders_meta->price[$i]}}" readonly> </td>
+                                        <td> <input type="text" name="product[qty][]" class="form-control" id="qty_{{$i}}" value="{{$orders_meta->qty[$i]}}"> </td>
+                                        <td> <input type="text" name="product[total][]" class="form-control total" id="total_{{$i}}" value="{{$orders_meta->total[$i]}}" readonly> </td>
+                                        <td> 
+                                            <input type="hidden" name="old_product[qty][]" id="op_qty{{$i}}" class="form-control" value="{{$orders_meta->qty[$i]}}">
+                                            <label class="btn btn-danger" onclick="hapustr({{$i}})">Delete</label>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -139,8 +164,8 @@
                     <div class="col-md-8"></div>
                     <div class="col-md-4">
                         <label><b>Total : </b></label>
-                        <input type="hidden" name="order[total_sales]" id="total_sales">
-                        <label id="label_total_sales" style="font-weight:bold"></label> 
+                        <input type="hidden" name="order[total_sales]" id="total_sales" value="{{$order->total_sales}}">
+                        <label id="label_total_sales" style="font-weight:bold">{{$order->total_sales}}</label> 
                     </div>
                 </div>
                 <div class="row">
@@ -159,7 +184,7 @@
 
 @section('scripts')
 <script>
-var $i = 0;
+var $i = parseInt($("#lengthtr").length);
 $("#addProduct").click(function(){
     $i++
     $("#showProduct").append(`
@@ -220,35 +245,6 @@ function changeQty(id) {
     $("#total_sales").val(sum) 
 
 }
-
-$.ajax({
-  url: "{{url('/json/countries.json')}}",
-  type: "get", // Jika GET "POST" diubah jadi "GET"
-  success: function(res){
-      var country = res.countries
-      for (let index = 0; index < country.length; index++) {
-        $('#country').append(`<option value=`+country[index].country+` selected="selected">`+country[index].country+`</option>`);
-      }
-  }
-});
-
-$("#country").change(function(){
-    $("#state option").remove();
-    $.ajax({
-    url: "{{url('/json/countries.json')}}",
-    type: "get", // Jika GET "POST" diubah jadi "GET"
-    success: function(res){
-            var country = res.countries
-            var states = country.filter(function(state) {
-                return state.country == ($("#country").val()) ;
-            });
-            state_name = states[0].states
-            for (let index = 0; index < state_name.length; index++) {
-                $('#state').append(`<option value="`+state_name[index]+`">`+state_name[index]+`</option>`);
-            }
-        }
-    });
-})
 
 </script>
 @stop

@@ -91,7 +91,9 @@ Route::post('/admin/settings/store','Admin\SettingController@store');
 
 Route::get('/admin/orders','Admin\OrderController@index');
 Route::get('/admin/orders/create','Admin\OrderController@create');
+Route::get('/admin/orders/edit/{id}','Admin\OrderController@edit');
 Route::post('/admin/orders/store','Admin\OrderController@store');
+Route::post('/admin/orders/update/{id}','Admin\OrderController@update');
 Route::get('/admin/orders/delete/{id}','Admin\OrderController@destroy');
 
 Route::get('/','Front\HomeController@index');
