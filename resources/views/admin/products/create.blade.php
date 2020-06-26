@@ -21,15 +21,15 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-body"><h5 class="card-title">Create Products</h5>
-                    <div class="position-relative form-group"><label class="">Name</label><input name="product[name]" placeholder="Product Name" type="text" class="form-control"></div>
-                    <div class="position-relative form-group"><label class="">Slug</label><input name="product[slug]" placeholder="" type="text" class="form-control"></div>
+                    <div class="position-relative form-group"><label class="">Name</label><input name="product[name]" placeholder="Product Name" type="text" class="form-control" required></div>
+                    <div class="position-relative form-group"><label class="">Slug</label><input name="product[slug]" placeholder="" type="text" class="form-control" required></div>
                     <div class="position-relative form-group">
                         <label for="">Description</label>
-                        <textarea name="product[description]" id="" cols="30" rows="10"></textarea>
+                        <textarea name="product[description]" id="" cols="30" rows="10" required></textarea>
                     </div>
                     <div class="position-relative form-group">
                         <label for="">Short Description</label>
-                        <textarea name="product[short_description]" id="" cols="30" rows="10"></textarea>
+                        <textarea name="product[short_description]" id="" cols="30" rows="10" required></textarea>
                     </div>
                 </div>
                 <div class="mt-3 card">
@@ -49,7 +49,7 @@
                             <div class="tab-pane active" id="general" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Regular Price</label>
-                                    <input name="meta[regular_price]" type="text" class="form-control">
+                                    <input name="meta[regular_price]" type="text" class="form-control" required>
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Sale Price</label>
@@ -59,11 +59,11 @@
                             <div class="tab-pane" id="inventory" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">SKU</label>
-                                    <input name="meta[sku]" type="text" class="form-control">
+                                    <input name="meta[sku]" type="text" class="form-control" required>
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Stock Quantity</label>
-                                    <input name="meta[qty]" type="text" class="form-control">
+                                    <input name="meta[qty]" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="tab-pane" id="shipping" role="tabpanel">
@@ -98,7 +98,7 @@
                 <div class="card card-body"><h5 class="card-title">Publish</h5>
                     <div class="position-relative form-group">
                         <label class="">Status</label>
-                        <select name="product[status]" id="" class="form-control">
+                        <select name="product[status]" id="" class="form-control" required>
                             <option value="Draft">Draft</option>
                             <option value="Publish">Publish</option>
                         </select>

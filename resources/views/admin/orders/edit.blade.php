@@ -214,15 +214,16 @@ function productChange(id){
     url: "{{url('admin/products')}}"+"/"+$("#product_id_"+id).val()+".json",
     type: "GET", // Jika GET "POST" diubah jadi "GET"
     success: function(res){
-            console.log(res)
-            console.log(res)
-            if (res[1].meta_value != null) {
-                $("#price_"+id).val(res[1].meta_value)
+        $data = JSON.parse(res[0].meta_value)
+            if ($data.regular_price != null) {
+                $("#price_"+id).val($data.regular_price)
+                price = $data.regular_price
             } else {
-                $("#price_"+id).val(res[0].meta_value)
+                $("#price_"+id).val($data.sale_price)
+                price = $data.sale_price
             }
             $("#qty_"+id).val(1)
-            $("#total_"+id).val(res[0].meta_value * 1)
+            $("#total_"+id).val(price * 1)
             
             var sum = 0;
             $('.total').each(function() {

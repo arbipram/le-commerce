@@ -45,7 +45,7 @@ class OrderController extends Controller
         $order_id = Order::latest()->first()->id;
         $id = (int) $order_id + 1;
         $order_no = "#Order ".date("Ymd",strtotime($request->order["date"])).$id;
-
+        
         \DB::beginTransaction();
         try {
             $customer = new Customer;
@@ -53,7 +53,7 @@ class OrderController extends Controller
                 $customer->$key = $value;
             }
             $customer->save();
-
+            
             $order = new Order;
             foreach($request->order as $key => $value){
                 $order->$key = $value;
@@ -61,22 +61,23 @@ class OrderController extends Controller
             $order->name = $order_no;
             $order->customer_id = $customer->id;
             $order->save();
-
+            
             $product = new OrderMeta;
             $product->orders_id = $order->id;
             $product->meta_key = "data";
             $product->meta_value = json_encode($request->product);
             $product->save();
-
+            
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
                 $product_id = Product::find($value);
-                $product = ProductMeta::where('products_id',$value)->where('meta_key',"qty")->first();
-                $stock = $product->meta_value;
-                $product->meta_value =  (int) $stock - (int) $request->product["qty"][$key];
-                if($product->meta_value < 0){
+                $product = ProductMeta::where('products_id',$value)->where('meta_key',"data")->first();
+                $data = json_decode($product->meta_value);
+                $data->qty =  (int) $data->qty - (int) $request->product["qty"][$key];
+                if($data->qty < 0){
                     return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
                 }
+                $product->meta_value = json_encode($data);
                 $product->save();
             }
 
@@ -133,9 +134,10 @@ class OrderController extends Controller
         try {
             //mengembalikan stock
             foreach($request->old_product["product_id"] as $old_key => $old_value){
-                $old_product = ProductMeta::where('products_id',$old_value)->where('meta_key',"qty")->first();
-                $old_stock = $old_product->meta_value;
-                $old_product->meta_value =  (int) $old_stock + (int) $request->old_product["qty"][$old_key];
+                $old_product = ProductMeta::where('products_id',$old_value)->first();
+                $old_stock = json_decode($old_product->meta_value);
+                $old_stock->qty =  (int) $old_stock->qty + (int) $request->old_product["qty"][$old_key];
+                $old_product->meta_value = json_encode($old_stock);
                 $old_product->save();
             }
 
@@ -156,12 +158,13 @@ class OrderController extends Controller
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
                 $product_id = Product::find($value);
-                $product = ProductMeta::where('products_id',$value)->where('meta_key',"qty")->first();
-                $stock = $product->meta_value;
-                $product->meta_value =  (int) $stock - (int) $request->product["qty"][$key];
-                if($product->meta_value < 0){
+                $product = ProductMeta::where('products_id',$value)->where('meta_key',"data")->first();
+                $data = json_decode($product->meta_value);
+                $data->qty =  (int) $data->qty - (int) $request->product["qty"][$key];
+                if($data->qty < 0){
                     return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
                 }
+                $product->meta_value = json_encode($data);
                 $product->save();
             }
             
@@ -182,14 +185,20 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $products = OrderMeta::where('orders_id',$id)->where('meta_key','product_id')->get();
-        $quantities = OrderMeta::where('orders_id',$id)->where('meta_key','qty')->get();
-        
-        foreach($products as $key => $value){
-            $product = ProductMeta::where('products_id',$value->meta_value)->where('meta_key',"qty")->first();
-            $stock = $product->meta_value;
-            $product->meta_value =  (int) $stock + (int) $quantities[$key]->meta_value;
-            $product->save();
+        //ambil orders
+        $orders = json_decode(OrderMeta::where('orders_id',$id)->first()->meta_value);
+        //pecah data orders
+        $i = 0;
+        foreach($orders->product_id as $order){
+            //ambil order qty
+            $order_qty = $orders->qty[$i];
+            //ambil qty product
+            $products = ProductMeta::where('products_id',$orders->product_id[$i])->first();
+            $product = json_decode($products->meta_value);
+            $product->qty = (int)$order_qty + (int) $product->qty;
+            $products->meta_value = json_encode($product);
+            $products->save();
+            $i++;
         }
 
         Order::find($id)->delete();

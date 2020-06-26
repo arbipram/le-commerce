@@ -52,16 +52,19 @@
                             <tbody>
                                 @if(!empty($products))
                                     @foreach($products as $i => $product)
+                                    @php
+                                        $meta = json_decode( $product->meta->where('meta_key','data')->first()->meta_value );
+                                    @endphp
                                     <tr>
                                         <td> {{$i+1}}</td>
                                         <td> {{$product->name}}</td>
-                                        <td> {{$product->meta ? $product->meta->where('meta_key','sku')->first()->meta_value : ''}}</td>
-                                        <td> {{$product->meta ? $product->meta->where('meta_key','qty')->first()->meta_value : ''}}</td>
-                                        <td> {{$product->meta ? $product->meta->where('meta_key','regular_price')->first()->meta_value : ''}} </td>
+                                        <td> {{ ($meta) ? $meta->sku : ''}}</td>
+                                        <td> {{ ($meta) ? $meta->qty : ''}}</td>
+                                        <td> {{ ($meta) ? $meta->regular_price : ''}}</td>
                                         @php
-                                            $category = $product_category->where('id',$product->meta->where('meta_key','categories')->first()->meta_value)->first();
+                                            $category = App\Models\ProductCategory::find($meta->categories);
                                         @endphp
-                                        <td> {{$category ? $category->name : ''}}</td>
+                                        <td> {{$category ? $category->name : ''}} </td>
                                         <td> {{$product->created_at}}</td>
                                         <td>
                                             <a href="{{url('/admin/products/edit/'.$product->id)}}" class="btn btn-info">Edit</a>

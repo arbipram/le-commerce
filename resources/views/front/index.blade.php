@@ -1,7 +1,14 @@
+@php
+use App\Models\Banner;
+use App\Models\ProductCategory;
+
+$banner = Banner::where('status','Enable')->latest()->first();
+$product_category = ProductCategory::get();
+@endphp
 @extends('front.layouts.app')
 @section('content')
 <!-- banner part start-->
-<section class="banner_part">
+<section class="banner_part" style="background-image:url('{{url('/uploads/'.$banner->image)}}') !important">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
@@ -9,9 +16,9 @@
                         <div class="single_banner_slider">
                             <div class="banner_text">
                                 <div class="banner_text_iner">
-                                    <h5>Winter Fasion</h5>
-                                    <h1>Fashion Collection 2019</h1>
-                                    <a href="#" class="btn_1">shop now</a>
+                                    <h5>{{$banner->h5}}</h5>
+                                    <h1>{{$banner->h1}}</h1>
+                                    <a href="{{$banner->button_link}}" class="btn_1">{{$banner->button_text}}</a>
                                 </div>
                             </div>
                         </div>
@@ -26,30 +33,16 @@
     <section class="feature_part pt-4">
         <div class="container-fluid p-lg-0 overflow-hidden">
             <div class="row align-items-center justify-content-between">
+                @foreach($product_category as $category)
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_feature_post_text">
-                        <img src="{{url('winter/img/feature_1.png')}}" alt="#">
+                        <img src="{{url('uploads/'.$category->image)}}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="#" class="btn_2">Shop For {{$category->name}}</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_feature_post_text">
-                        <img src="{{url('winter/img/feature_2.png')}}" alt="#">
-                        <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_feature_post_text">
-                        <img src="{{url('winter/img/feature_3.png')}}" alt="#">
-                        <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -239,35 +232,6 @@
     <!-- widget end -->
 
     <!-- subscribe_area part start-->
-    <section class="instagram_photo">
-        <div class="container-fluid>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="instagram_photo_iner">
-                        <div class="single_instgram_photo">
-                            <img src="{{url('winter/img/instagram/inst_1.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{url('winter/img/instagram/inst_2.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{url('winter/img/instagram/inst_3.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{url('winter/img/instagram/inst_4.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{url('winter/img/instagram/inst_5.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- @include('front.partials.instagram') -->
     <!--::subscribe_area part end::-->
 @stop

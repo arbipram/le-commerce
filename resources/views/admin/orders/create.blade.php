@@ -25,11 +25,11 @@
                         <h6>General</h6>
                         <div class="position-relative form-group">
                             <label class="">Date</label>
-                            <input name="order[date]" type="date" class="form-control">
+                            <input name="order[date]" type="date" class="form-control" required>
                         </div>
                         <div class="position-relative form-group">
                             <label for="">Status</label>
-                            <select name="order[status]" class="form-control">
+                            <select name="order[status]" class="form-control" required>
                                 <option value="Pending Payment">Pending Payment</option>
                                 <option value="Processing">Processing</option>
                                 <option value="On Hold">On Hold</option>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="position-relative form-group">
                             <label for="">Payment Method</label>
-                            <select name="order[payment_method]" class="form-control">
+                            <select name="order[payment_method]" class="form-control" required>
                                 <option value="Direct Bank Transfer">Direct Bank Transfer</option>
                                 <option value="Cash On Delivery">Cash On Delivery</option>
                             </select>
@@ -52,25 +52,25 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">First Name</label>
-                                    <input name="customer[first_name]" type="text" class="form-control">
+                                    <input name="customer[first_name]" required type="text" class="form-control">
                                 </div>        
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Last Name</label>
-                                    <input name="customer[last_name]" type="text" class="form-control">
+                                    <input name="customer[last_name]" required type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="position-relative form-group">
                             <label class="">Address</label>
-                            <textarea name="customer[address]" id="" cols="30" rows="4" class="form-control"></textarea>
+                            <textarea name="customer[address]" required id="" cols="30" rows="4" class="form-control"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Country</label>
-                                    <select name="customer[country]" id="country" class="form-control">
+                                    <select name="customer[country]" required id="country" class="form-control">
                                         <option value=""></option>
                                     </select>
                                 </div>
@@ -78,7 +78,7 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">State</label>
-                                    <select name="customer[state]" id="state" class="form-control">
+                                    <select name="customer[state]" required id="state" class="form-control">
                                         <option value=""></option>
                                     </select>
                                 </div>
@@ -88,13 +88,13 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">City</label>
-                                    <input name="customer[city]" type="text" class="form-control">
+                                    <input name="customer[city]" required type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Postcode</label>
-                                    <input name="customer[postcode]" type="text" class="form-control">
+                                    <input name="customer[postcode]" required type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label class="">Phone Number</label>
-                                    <input name="customer[phone_number]" type="text" class="form-control">
+                                    <input name="customer[phone_number]" required type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -189,14 +189,16 @@ function productChange(id){
     url: "{{url('admin/products')}}"+"/"+$("#product_id_"+id).val()+".json",
     type: "GET", // Jika GET "POST" diubah jadi "GET"
     success: function(res){
-            console.log(res)
-            if (res[1].meta_value != null) {
-                $("#price_"+id).val(res[1].meta_value)
+            $data = JSON.parse(res[0].meta_value)
+            if ($data.sale_price != null) {
+                $("#price_"+id).val($data.sale_price)
+                price = $data.sale_price
             } else {
-                $("#price_"+id).val(res[0].meta_value)
+                $("#price_"+id).val($data.regular_price)
+                price = $data.regular_price
             }
             $("#qty_"+id).val(1)
-            $("#total_"+id).val(res[0].meta_value * 1)
+            $("#total_"+id).val(price * 1)
             
             var sum = 0;
             $('.total').each(function() {

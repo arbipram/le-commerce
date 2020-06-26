@@ -97,22 +97,11 @@
                 <div class="mb-3 card">
                     <div class="card-header-tab card-header-tab-animation card-header">
                         <div class="card-header-title">
-                            <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
                             Orders
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tabs-eg-77">
-                                <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
-                                    <div class="widget-chat-wrapper-outer">
-                                        <div class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                            <canvas id="canvas"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <canvas id="OrderChart" height="100px"></canvas>
                     </div>
                 </div>
             </div>
@@ -126,8 +115,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th class="text-center">Order #</th>
-                                <th class="text-center">Status</th>
                                 <th class="text-center">Customer</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Total</th>
                             </tr>
                             </thead>
@@ -151,4 +140,46 @@
     </div>
     @include('admin.partials.footer')
 </div>
+@stop
+
+@section('scripts')
+<script>
+var ctx = document.getElementById('OrderChart').getContext('2d');
+var OrderChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 @stop

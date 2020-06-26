@@ -21,15 +21,15 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-body"><h5 class="card-title">Create Products</h5>
-                    <div class="position-relative form-group"><label class="">Name</label><input name="product[name]" value="{{$product->name}}" placeholder="Product Name" type="text" class="form-control"></div>
-                    <div class="position-relative form-group"><label class="">Slug</label><input name="product[slug]" value="{{$product->slug}}" placeholder="" type="text" class="form-control"></div>
+                    <div class="position-relative form-group"><label class="">Name</label><input name="product[name]" value="{{$product->name}}" required placeholder="Product Name" type="text" class="form-control"></div>
+                    <div class="position-relative form-group"><label class="">Slug</label><input name="product[slug]" value="{{$product->slug}}" required placeholder="" type="text" class="form-control"></div>
                     <div class="position-relative form-group">
                         <label for="">Description</label>
-                        <textarea name="product[description]" id="" cols="30" rows="10">{{$product->description}}</textarea>
+                        <textarea name="product[description]" id="" cols="30" rows="10" required>{{$product->description}}</textarea>
                     </div>
                     <div class="position-relative form-group">
                         <label for="">Short Description</label>
-                        <textarea name="product[short_description]" id="" cols="30" rows="10">{{$product->short_description}}</textarea>
+                        <textarea name="product[short_description]" id="" cols="30" rows="10" required>{{$product->short_description}}</textarea>
                     </div>
                 </div>
                 <div class="mt-3 card">
@@ -49,45 +49,45 @@
                             <div class="tab-pane active" id="general" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Regular Price</label>
-                                    <input name="meta[regular_price]" value="{{$meta->where('meta_key','regular_price')->first() ? $meta->where('meta_key','regular_price')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[regular_price]" value="{{$data ? $data->regular_price : ''}}" required type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Sale Price</label>
-                                    <input name="meta[sale_price]" value="{{$meta->where('meta_key','sale_price')->first() ? $meta->where('meta_key','sale_price')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[sale_price]" value="{{$data ? $data->sale_price : ''}}" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="inventory" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">SKU</label>
-                                    <input name="meta[sku]" value="{{$meta->where('meta_key','sku')->first() ? $meta->where('meta_key','sku')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[sku]" value="{{$data ? $data->sku : ''}}" required type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Stock Quantity</label>
-                                    <input name="meta[qty]" value="{{$meta->where('meta_key','qty')->first() ? $meta->where('meta_key','qty')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[qty]" value="{{$data ? $data->qty : ''}}" required type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="shipping" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Weight</label>
-                                    <input name="meta[weight]" value="{{$meta->where('meta_key','weight')->first() ? $meta->where('meta_key','weight')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[weight]" value="{{$data ? $data->weight : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Length</label>
-                                    <input name="meta[length]" value="{{$meta->where('meta_key','length')->first() ? $meta->where('meta_key','length')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[length]" value="{{$data ? $data->length : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Width</label>
-                                    <input name="meta[width]" value="{{$meta->where('meta_key','width')->first() ? $meta->where('meta_key','width')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[width]" value="{{$data ? $data->width : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Height</label>
-                                    <input name="meta[height]" value="{{$meta->where('meta_key','height')->first() ? $meta->where('meta_key','height')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    <input name="meta[height]" value="{{$data ? $data->height : ''}}" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="advanced" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Purchase Note</label>
-                                    <textarea name="meta[purchase_note]" id="" cols="30" rows="10" class="form-control">{{$meta->where('meta_key','purchase_note')->first() ? $meta->where('meta_key','purchase_note')->first()->meta_value : ''}}</textarea>
+                                    <textarea name="meta[purchase_note]" id="" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                 <div class="card card-body"><h5 class="card-title">Publish</h5>
                     <div class="position-relative form-group">
                         <label class="">Status</label>
-                        <select name="product[status]"id="" class="form-control">
+                        <select name="product[status]"id="" class="form-control" required>
                             <option value="{{$product->status}}">{{$product->status}}</option>
                             <option value="Draft">Draft</option>
                             <option value="Publish">Publish</option>
@@ -119,13 +119,13 @@
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
                     @if(!empty($max_product_image))
-                        @for($i=1; $i <= $max_product_image->meta_value ;$i++)
-                            <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
+                        @for($i=0; $i < $max_product_image->meta_value ;$i++)
+                            <img src="{{$images->where('meta_key','image_'.$i)->first() ? url('uploads/'.$images->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
                             <input type="file" name="image[]" class="form-control">
                         @endfor
                     @else
-                        @for($i=1;$i <= 4;$i++)
-                            <img src="{{$meta->where('meta_key','image_'.$i)->first() ? url('uploads/'.$meta->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
+                        @for($i=0;$i < 4;$i++)
+                            <img src="{{$images->where('meta_key','image_'.$i)->first() ? url('uploads/'.$images->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
                             <input type="file" name="image_{{$i}}" class="form-control">
                         @endfor
                     @endif
