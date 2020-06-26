@@ -17,7 +17,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data['orders'] = Order::get();
         return view('admin.orders.index',$data);
@@ -70,11 +70,16 @@ class OrderController extends Controller
 
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
+                $product_id = Product::find($value);
                 $product = ProductMeta::where('products_id',$value)->where('meta_key',"qty")->first();
                 $stock = $product->meta_value;
                 $product->meta_value =  (int) $stock - (int) $request->product["qty"][$key];
+                if($product->meta_value < 0){
+                    return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
+                }
                 $product->save();
             }
+
             
             \DB::commit();
         } catch (\Throwable $th) {
@@ -150,9 +155,13 @@ class OrderController extends Controller
 
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
+                $product_id = Product::find($value);
                 $product = ProductMeta::where('products_id',$value)->where('meta_key',"qty")->first();
                 $stock = $product->meta_value;
                 $product->meta_value =  (int) $stock - (int) $request->product["qty"][$key];
+                if($product->meta_value < 0){
+                    return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
+                }
                 $product->save();
             }
             

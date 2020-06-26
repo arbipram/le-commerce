@@ -190,7 +190,11 @@ function productChange(id){
     type: "GET", // Jika GET "POST" diubah jadi "GET"
     success: function(res){
             console.log(res)
-            $("#price_"+id).val(res[0].meta_value)
+            if (res[1].meta_value != null) {
+                $("#price_"+id).val(res[1].meta_value)
+            } else {
+                $("#price_"+id).val(res[0].meta_value)
+            }
             $("#qty_"+id).val(1)
             $("#total_"+id).val(res[0].meta_value * 1)
             

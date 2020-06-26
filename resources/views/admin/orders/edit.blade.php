@@ -137,9 +137,10 @@
                                     @php
                                         $product = \App\Models\Product::find($meta);
                                     @endphp
+                                    <input type="hidden" name="old_product[product_id][]" id="op_pid{{$i}}" class="form-control" value="{{$product->id}}">
+                                    <input type="hidden" name="old_product[qty][]" id="op_qty{{$i}}" class="form-control" value="{{$orders_meta->qty[$i]}}">
                                     <tr id="tr_{{$i}}" class="lengthtr">
                                         <td>
-                                            <input type="hidden" name="old_product[product_id][]" id="op_pid{{$i}}" class="form-control" value="{{$product->id}}">
                                             <select name="product[product_id][]" onchange="productChange({{$i}})" id="product_id_{{$i}}`" class="form-control">
                                                 <option value="{{$product->id}}">{{$product->name}}</option>
                                                 @foreach($products as $j => $product)
@@ -151,7 +152,6 @@
                                         <td> <input type="text" name="product[qty][]" class="form-control" id="qty_{{$i}}" value="{{$orders_meta->qty[$i]}}"> </td>
                                         <td> <input type="text" name="product[total][]" class="form-control total" id="total_{{$i}}" value="{{$orders_meta->total[$i]}}" readonly> </td>
                                         <td> 
-                                            <input type="hidden" name="old_product[qty][]" id="op_qty{{$i}}" class="form-control" value="{{$orders_meta->qty[$i]}}">
                                             <label class="btn btn-danger" onclick="hapustr({{$i}})">Delete</label>
                                         </td>
                                     </tr>
@@ -215,7 +215,12 @@ function productChange(id){
     type: "GET", // Jika GET "POST" diubah jadi "GET"
     success: function(res){
             console.log(res)
-            $("#price_"+id).val(res[0].meta_value)
+            console.log(res)
+            if (res[1].meta_value != null) {
+                $("#price_"+id).val(res[1].meta_value)
+            } else {
+                $("#price_"+id).val(res[0].meta_value)
+            }
             $("#qty_"+id).val(1)
             $("#total_"+id).val(res[0].meta_value * 1)
             

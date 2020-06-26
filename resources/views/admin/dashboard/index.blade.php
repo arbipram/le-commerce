@@ -13,60 +13,7 @@
                         <div class="page-title-subheading">This is your store dashboard performance.
                         </div>
                     </div>
-                </div>
-                <div class="page-title-actions">
-                    <!--                
-                    <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
-                        <i class="fa fa-star"></i>
-                    </button>
-                    <div class="d-inline-block dropdown">
-                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
-                            <span class="btn-icon-wrapper pr-2 opacity-7">
-                                <i class="fa fa-business-time fa-w-20"></i>
-                            </span>
-                            Buttons
-                        </button>
-                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        <i class="nav-link-icon lnr-inbox"></i>
-                                        <span>
-                                            Inbox
-                                        </span>
-                                        <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        <i class="nav-link-icon lnr-book"></i>
-                                        <span>
-                                            Book
-                                        </span>
-                                        <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        <i class="nav-link-icon lnr-picture"></i>
-                                        <span>
-                                            Picture
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                        <i class="nav-link-icon lnr-file-empty"></i>
-                                        <span>
-                                            File Disabled
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    -->
-                </div>    
+                </div>   
             </div>
         </div>           
         <div class="row">
@@ -77,29 +24,30 @@
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label>Start Date</label>
-                                    <input name="start_date" placeholder="Start Date" type="date" class="form-control" required></div>
+                                    <input name="start_date" placeholder="Start Date" type="date" class="form-control" required value="{{ $_REQUEST ? $_REQUEST['start_date'] : '' }}"></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label>End Date</label>
-                                    <input name="end_date" placeholder="End Date" type="date" class="form-control" required></div>
+                                    <input name="end_date" placeholder="End Date" type="date" class="form-control" required value="{{ $_REQUEST ? $_REQUEST['end_date'] : '' }}"></div>
                             </div>
                         </div>
                         <button class="mt-2 btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
-        </div> 
+        </div>
+        @if(!empty($_REQUEST["start_date"]) && !empty($_REQUEST["end_date"])) 
         <div class="row">
             <div class="col-md-6 col-xl-4">
                 <div class="card mb-3 widget-content bg-midnight-bloom">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
                             <div class="widget-heading">Total Sales</div>
-                            <div class="widget-subheading">Previous Year : Rp. 60.000.000</div>
+                            <div class="widget-subheading">Previous Year : Rp. {{number_format($prev_total_sales,0,'.',',')}}</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>Rp. 30.000.000</span></div>
+                            <div class="widget-numbers text-white"><span>Rp. {{number_format($total_sales,0,'.',',')}}</span></div>
                         </div>
                     </div>
                 </div>
@@ -109,10 +57,10 @@
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
                             <div class="widget-heading">Orders</div>
-                            <div class="widget-subheading">Previous Year : 1980</div>
+                            <div class="widget-subheading">Previous Year : {{$prev_total_order}}</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>568</span></div>
+                            <div class="widget-numbers text-white"><span>{{$total_order}}</span></div>
                         </div>
                     </div>
                 </div>
@@ -121,11 +69,11 @@
                 <div class="card mb-3 widget-content bg-grow-early">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Item Sold</div>
-                            <div class="widget-subheading">Previous Year : 8977</div>
+                            <div class="widget-heading">Total Customers</div>
+                            <div class="widget-subheading">Previous Year : {{$prev_total_customer}}</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>4687</span></div>
+                            <div class="widget-numbers text-white"><span>{{$total_customer}}</span></div>
                         </div>
                     </div>
                 </div>
@@ -180,28 +128,26 @@
                                 <th class="text-center">Order #</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Customer</th>
-                                <th class="text-center">Products</th>
-                                <th class="text-center">Qty</th>
                                 <th class="text-center">Total</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($orders as $order)
                             <tr>
-                                <td class="text-center">June 13, 2020</td>
-                                <td class="text-center">14</td>
-                                <td class="text-center">Completed</td>
-                                <td class="text-center">New</td>
-                                <td class="text-center">Product Name</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">Rp.1000.000</td>
+                                <td class="text-center"> {{$order->date}} </td>
+                                <td class="text-center"> {{$order->name}} </td>
+                                <td class="text-center"> {{$order->customer ? $order->customer->first_name." ".$order->customer->last_name : ''}} </td>
+                                <td class="text-center"> {{$order->status}} </td>
+                                <td class="text-center"> {{$order->total_sales}} </td>
                             </tr>
-                            
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        @endif
     </div>
     @include('admin.partials.footer')
 </div>
