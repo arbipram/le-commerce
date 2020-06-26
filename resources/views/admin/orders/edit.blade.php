@@ -211,16 +211,15 @@ function hapustr(id) {
 
 function productChange(id){
     $.ajax({
-    url: "{{url('admin/products')}}"+"/"+$("#product_id_"+id).val()+".json",
-    type: "GET", // Jika GET "POST" diubah jadi "GET"
-    success: function(res){
-        $data = JSON.parse(res[0].meta_value)
-            if ($data.regular_price != null) {
-                $("#price_"+id).val($data.regular_price)
-                price = $data.regular_price
+        url: "{{url('admin/products')}}"+"/"+$("#product_id_"+id).val()+".json",
+        type: "GET", // Jika GET "POST" diubah jadi "GET"
+        success: function(res){
+            if (res.regular_price != null) {
+                $("#price_"+id).val(res.regular_price)
+                price = res.regular_price
             } else {
-                $("#price_"+id).val($data.sale_price)
-                price = $data.sale_price
+                $("#price_"+id).val(res.sale_price)
+                price = res.sale_price
             }
             $("#qty_"+id).val(1)
             $("#total_"+id).val(price * 1)

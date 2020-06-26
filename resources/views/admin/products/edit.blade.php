@@ -49,39 +49,39 @@
                             <div class="tab-pane active" id="general" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Regular Price</label>
-                                    <input name="meta[regular_price]" value="{{$data ? $data->regular_price : ''}}" required type="text" class="form-control">
+                                    <input name="meta[regular_price]" value="{{$meta ? $meta->regular_price : ''}}" required type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Sale Price</label>
-                                    <input name="meta[sale_price]" value="{{$data ? $data->sale_price : ''}}" type="text" class="form-control">
+                                    <input name="meta[sale_price]" value="{{$meta ? $meta->sale_price : ''}}" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="inventory" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">SKU</label>
-                                    <input name="meta[sku]" value="{{$data ? $data->sku : ''}}" required type="text" class="form-control">
+                                    <input name="meta[sku]" value="{{$meta ? $meta->sku : ''}}" required type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Stock Quantity</label>
-                                    <input name="meta[qty]" value="{{$data ? $data->qty : ''}}" required type="text" class="form-control">
+                                    <input name="meta[qty]" value="{{$meta ? $meta->qty : ''}}" required type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="shipping" role="tabpanel">
                                 <div class="position-relative form-group">
                                     <label class="">Weight</label>
-                                    <input name="meta[weight]" value="{{$data ? $data->weight : ''}}" type="text" class="form-control">
+                                    <input name="meta[weight]" value="{{$meta ? $meta->weight : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Length</label>
-                                    <input name="meta[length]" value="{{$data ? $data->length : ''}}" type="text" class="form-control">
+                                    <input name="meta[length]" value="{{$meta ? $meta->length : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Width</label>
-                                    <input name="meta[width]" value="{{$data ? $data->width : ''}}" type="text" class="form-control">
+                                    <input name="meta[width]" value="{{$meta ? $meta->width : ''}}" type="text" class="form-control">
                                 </div>
                                 <div class="position-relative form-group">
                                     <label class="">Height</label>
-                                    <input name="meta[height]" value="{{$data ? $data->height : ''}}" type="text" class="form-control">
+                                    <input name="meta[height]" value="{{$meta ? $meta->height : ''}}" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="tab-pane" id="advanced" role="tabpanel">
@@ -118,17 +118,13 @@
                 </div>
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
-                    @if(!empty($max_product_image))
-                        @for($i=0; $i < $max_product_image->meta_value ;$i++)
-                            <img src="{{$images->where('meta_key','image_'.$i)->first() ? url('uploads/'.$images->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
-                            <input type="file" name="image[]" class="form-control">
-                        @endfor
-                    @else
-                        @for($i=0;$i < 4;$i++)
-                            <img src="{{$images->where('meta_key','image_'.$i)->first() ? url('uploads/'.$images->where('meta_key','image_'.$i)->first()->meta_value) : ''}}" alt="No Image" width="100px" height="100px">
-                            <input type="file" name="image_{{$i}}" class="form-control">
-                        @endfor
-                    @endif
+                    @for($i=1;$i <= 4;$i++)
+                        @php
+                            $key = "image_".$i;
+                        @endphp
+                        <img src="{{$meta ? url('uploads/'.$meta->$key) : ''}}" alt="No Image" width="100px" height="100px">
+                        <input type="file" name="image_{{$i}}" class="form-control">
+                    @endfor
                 </div>
             </div>
         </div>

@@ -117,15 +117,9 @@
                 </div>
                 <div class="card card-body mt-3"><h5 class="card-title">Product Images</h5>
                     <label for="">Images</label>
-                    @if(!empty($max_product_image))
-                        @for($i=1; $i <= $max_product_image->meta_value ;$i++)
-                            <input type="file" name="image[]" class="form-control">
-                        @endfor
-                    @else
-                        @for($i=1; $i <= 4 ;$i++)
-                            <input type="file" name="image[]" class="form-control">
-                        @endfor
-                    @endif
+                    @for($i=1; $i <= 4 ;$i++)
+                        <input type="file" name="image_{{$i}}" class="form-control">
+                    @endfor
                 </div>
             </div>
         </div>

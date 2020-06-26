@@ -52,27 +52,24 @@ class ProductController extends Controller
                 $product->$key = $value;
             };
             $product->save();
-
+            
             $meta = new ProductMeta;
             $meta->products_id = $product->id;
-            $meta->meta_key = "data";
-            $meta->meta_value = json_encode($request->meta);
-            $meta->save();
+            foreach($request->meta as $key => $value){
+                $meta->$key = $value;
+            };
             
-            if ($request->hasFile('image')) {
-                $i = 1;
-                foreach($request->image as $key => $value){
-                    $images = new ProductMeta;
-                    $images->products_id = $product->id;
-                    $images->meta_key = "image_".$i;
-                    $image = $request->image[$key];
+            for ($i=1; $i <= 4 ; $i++) { 
+                if ($request->hasFile('image_'.$i)) {
+                    $key = "image_".$i;
+                    $image = $request->$key;
                     $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
                     $image->move('uploads/', $fileName);
-                    $images->meta_value = $fileName;
-                    $images->save();
-                    $i++;
+                    $meta->$key = $fileName;
                 };
             }
+
+            $meta->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -102,10 +99,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['product'] = Product::find($id);
-        $data['images'] = ProductMeta::where('products_id',$id)->where('meta_key','!=','data')->get();
-        $data['data'] = json_decode(ProductMeta::where('products_id',$id)->where('meta_key','data')->first()->meta_value);
+        $data['meta'] = ProductMeta::where('products_id',$id)->first();
         $data['products_categories'] = ProductCategory::get();
-        $data['max_product_image'] = StoreSetting::where('type','product-general')->where('meta_key','max_product_image')->first();
         return view('admin.products.edit',$data);        
     }
 
@@ -125,35 +120,23 @@ class ProductController extends Controller
                 $product->$key = $value;
             };
             $product->save();
-
-            $meta = ProductMeta::where('products_id',$product->id)->where('meta_key','data')->first();
+            
+            $meta = ProductMeta::where('products_id',$product->id);
             $meta->products_id = $product->id;
-            $meta->meta_key = "data";
-            $meta->meta_value = json_encode($request->meta);
-            $meta->save();
-            if(!empty($request->image)){
-                foreach($request->image as $key => $value){
-                    $images = ProductMeta::where('meta_key',"image_".$key)->first();
-                    if(!empty($images)){
-                        $images->products_id = $product->id;
-                        $images->meta_key = "image_".$key;
-                        $image = $request->image[$key];
-                        $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
-                        $image->move('uploads/', $fileName);
-                        $images->meta_value = $fileName;
-                        $images->save();
-                    } else {
-                        $images = new ProductMeta;
-                        $images->products_id = $product->id;
-                        $images->meta_key = "image_".$key;
-                        $image = $request->image[$key]; // array starts from 0
-                        $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
-                        $image->move('uploads/', $fileName);
-                        $images->meta_value = $fileName;
-                        $images->save();
-                    }
-                }
+            foreach($request->meta as $key => $value){
+                $meta->$key = $value;
+            };
+            
+            for ($i=1; $i <= 4 ; $i++) { 
+                if ($request->hasFile('image_'.$i)) {
+                    $key = "image_".$i;
+                    $image = $request->$key;
+                    $fileName = Str::random(30).'.'.$image->getClientOriginalExtension();
+                    $image->move('uploads/', $fileName);
+                    $meta->$key = $fileName;
+                };
             }
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

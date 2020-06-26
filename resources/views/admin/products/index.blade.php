@@ -52,17 +52,14 @@
                             <tbody>
                                 @if(!empty($products))
                                     @foreach($products as $i => $product)
-                                    @php
-                                        $meta = json_decode( $product->meta->where('meta_key','data')->first()->meta_value );
-                                    @endphp
                                     <tr>
                                         <td> {{$i+1}}</td>
                                         <td> {{$product->name}}</td>
-                                        <td> {{ ($meta) ? $meta->sku : ''}}</td>
-                                        <td> {{ ($meta) ? $meta->qty : ''}}</td>
-                                        <td> {{ ($meta) ? $meta->regular_price : ''}}</td>
+                                        <td> {{ ($product->meta) ? $product->meta->sku : ''}}</td>
+                                        <td> {{ ($product->meta) ? $product->meta->qty : ''}}</td>
+                                        <td> {{ ($product->meta) ? $product->meta->regular_price : ''}}</td>
                                         @php
-                                            $category = App\Models\ProductCategory::find($meta->categories);
+                                            $category = App\Models\ProductCategory::find($product->meta->categories);
                                         @endphp
                                         <td> {{$category ? $category->name : ''}} </td>
                                         <td> {{$product->created_at}}</td>

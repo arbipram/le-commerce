@@ -71,13 +71,11 @@ class OrderController extends Controller
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
                 $product_id = Product::find($value);
-                $product = ProductMeta::where('products_id',$value)->where('meta_key',"data")->first();
-                $data = json_decode($product->meta_value);
-                $data->qty =  (int) $data->qty - (int) $request->product["qty"][$key];
-                if($data->qty < 0){
+                $product = ProductMeta::where('products_id',$value)->first();
+                $product->qty =  (int) $product->qty - (int) $request->product["qty"][$key];
+                if($product->qty < 0){
                     return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
                 }
-                $product->meta_value = json_encode($data);
                 $product->save();
             }
 
@@ -135,9 +133,7 @@ class OrderController extends Controller
             //mengembalikan stock
             foreach($request->old_product["product_id"] as $old_key => $old_value){
                 $old_product = ProductMeta::where('products_id',$old_value)->first();
-                $old_stock = json_decode($old_product->meta_value);
-                $old_stock->qty =  (int) $old_stock->qty + (int) $request->old_product["qty"][$old_key];
-                $old_product->meta_value = json_encode($old_stock);
+                $old_product->qty =  (int) $old_product->qty + (int) $request->old_product["qty"][$old_key];
                 $old_product->save();
             }
 
@@ -158,13 +154,11 @@ class OrderController extends Controller
             //mengurangi stock
             foreach($request->product["product_id"] as $key => $value){
                 $product_id = Product::find($value);
-                $product = ProductMeta::where('products_id',$value)->where('meta_key',"data")->first();
-                $data = json_decode($product->meta_value);
-                $data->qty =  (int) $data->qty - (int) $request->product["qty"][$key];
-                if($data->qty < 0){
+                $product = ProductMeta::where('products_id',$value)->first();
+                $product->qty =  (int) $product->qty - (int) $request->product["qty"][$key];
+                if($product->qty < 0){
                     return "Maaf Stock ".$product_id->name." Tidak Mencukupi";
                 }
-                $product->meta_value = json_encode($data);
                 $product->save();
             }
             
@@ -193,16 +187,15 @@ class OrderController extends Controller
             //ambil order qty
             $order_qty = $orders->qty[$i];
             //ambil qty product
-            $products = ProductMeta::where('products_id',$orders->product_id[$i])->first();
-            $product = json_decode($products->meta_value);
+            $product = ProductMeta::where('products_id',$orders->product_id[$i])->first();
             $product->qty = (int)$order_qty + (int) $product->qty;
-            $products->meta_value = json_encode($product);
-            $products->save();
+            $product->save();
             $i++;
         }
 
         Order::find($id)->delete();
         OrderMeta::where('orders_id',$id)->delete();
+
         return redirect("admin/orders");        
     }
 }
