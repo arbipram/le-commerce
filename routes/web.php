@@ -97,3 +97,4 @@ Route::post('/admin/orders/update/{id}','Admin\OrderController@update');
 Route::get('/admin/orders/delete/{id}','Admin\OrderController@destroy');
 
 Route::get('/','Front\HomeController@index');
+Route::get('/products','Front\ProductController@index');

@@ -54,6 +54,14 @@
                                         <label class="">Postcode</label>
                                         <input name="meta[postcode]" value="{{$general->where('meta_key','postcode')->first() ? $general->where('meta_key','postcode')->first()->meta_value : ''}}" type="text" class="form-control">
                                     </div>
+                                    <div class="position-relative form-group">
+                                        <label class="">Phone No</label>
+                                        <input name="meta[phone_no]" value="{{$general->where('meta_key','phone_no')->first() ? $general->where('meta_key','phone_no')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    </div>
+                                    <div class="position-relative form-group">
+                                        <label class="">Email</label>
+                                        <input name="meta[email]" value="{{$general->where('meta_key','email')->first() ? $general->where('meta_key','email')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    </div>
                                 @csrf
                                 <button type="submit" class="btn btn-success">Save Changes</button>
                                 </form>

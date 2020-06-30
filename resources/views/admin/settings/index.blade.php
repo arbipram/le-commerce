@@ -41,6 +41,10 @@
                                         <label class="">URL Logo</label>
                                         <input name="meta[logo]" value="{{$general->where('meta_key','logo')->first() ? $general->where('meta_key','logo')->first()->meta_value : ''}}" type="text" class="form-control">
                                     </div>
+                                    <div class="position-relative form-group">
+                                        <label class="">Footer</label>
+                                        <input name="meta[footer]" value="{{$general->where('meta_key','footer')->first() ? $general->where('meta_key','footer')->first()->meta_value : ''}}" type="text" class="form-control">
+                                    </div>
 
                                 @csrf
                                 <button type="submit" class="btn btn-success">Save Changes</button>

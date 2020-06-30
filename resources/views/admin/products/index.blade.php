@@ -44,6 +44,7 @@
                                     <th>SKU</th>
                                     <th>Stock</th>
                                     <th>Price</th>
+                                    <th>Sale Price</th>
                                     <th>Categories</th>
                                     <th>Date</th>
                                     <th>Actions</th>
@@ -58,10 +59,8 @@
                                         <td> {{ ($product->meta) ? $product->meta->sku : ''}}</td>
                                         <td> {{ ($product->meta) ? $product->meta->qty : ''}}</td>
                                         <td> {{ ($product->meta) ? $product->meta->regular_price : ''}}</td>
-                                        @php
-                                            $category = App\Models\ProductCategory::find($product->meta->categories);
-                                        @endphp
-                                        <td> {{$category ? $category->name : ''}} </td>
+                                        <td> {{ ($product->meta) ? $product->meta->sale_price : ''}}</td>
+                                        <td> {{$product->meta->category ? $product->meta->category->name : ''}} </td>
                                         <td> {{$product->created_at}}</td>
                                         <td>
                                             <a href="{{url('/admin/products/edit/'.$product->id)}}" class="btn btn-info">Edit</a>

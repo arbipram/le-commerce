@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Widget;
 
 class HomeController extends Controller
 {
@@ -14,7 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.index');
+        $data['products'] = Product::latest()->take(6)->get();
+        $data['widgets'] = Widget::get();
+        return view('front.index',$data);
     }
 
     /**

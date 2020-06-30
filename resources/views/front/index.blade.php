@@ -38,7 +38,7 @@ $product_category = ProductCategory::get();
                     <div class="single_feature_post_text">
                         <img src="{{url('uploads/'.$category->image)}}" alt="#">
                         <div class="hover_text">
-                            <a href="#" class="btn_2">Shop For {{$category->name}}</a>
+                            <a href="{{url('/products/category/'.$category->slug)}}" class="btn_2">Shop For {{$category->name}}</a>
                         </div>
                     </div>
                 </div>
@@ -57,133 +57,75 @@ $product_category = ProductCategory::get();
                         <h2>new arrival</h2>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="arrival_filter_item filters">
-                        <ul>
-                            <li class="active controls" data-filter="*">all</li>
-                            <li class="controls" data-toggle=".men">men</li>
-                            <li class="controls" data-toggle=".women">women</li>
-                            <li class="controls" data-toggle=".shoes">shoes</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="new_arrival_iner filter-container">
-                        <div class="single_arrivel_item weidth_1 mix shoes">
-                            <img src="{{url('winter/img/arrivel/arrivel_5.png')}}" alt="#">
+                        <div class="single_arrivel_item width_1 mix shoes">
+                            <img src="{{url('/uploads/'.$products[0]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[0]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[0]->slug)}}"><h3>{{$products[0]->name}}</h3></a>
+                                <h5>{{$products[0]->meta->sale_price ? "Rp ".number_format($products[0]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[0]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[0]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_arrivel_item weidth_2 mix women">
-                            <img src="{{url('winter/img/arrivel/arrivel_2.png')}}" alt="#">
+                        <div class="single_arrivel_item width_2 mix" id="men">
+                            <img src="{{url('/uploads/'.$products[1]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[1]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[1]->slug)}}"><h3>{{$products[1]->name}}</h3></a>
+                                <h5>{{$products[1]->meta->sale_price ? "Rp ".number_format($products[1]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[1]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[1]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_arrivel_item weidth_3 mix shoes women" >
-                            <img src="{{url('winter/img/arrivel/arrivel_3.png')}}" alt="#">
+                        <div class="single_arrivel_item width_3 mix shoes women" >
+                            <img src="{{url('/uploads/'.$products[2]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[2]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[2]->slug)}}"><h3>{{$products[2]->name}}</h3></a>
+                                <h5>{{$products[2]->meta->sale_price ? "Rp ".number_format($products[2]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[2]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[2]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_arrivel_item weidth_3 mix women men">
-                            <img src="{{url('winter/img/arrivel/arrivel_4.png')}}" alt="#">
+                        <div class="single_arrivel_item width_3 mix women men">
+                            <img src="{{url('/uploads/'.$products[3]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[3]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[3]->slug)}}"><h3>{{$products[3]->name}}</h3></a>
+                                <h5>{{$products[3]->meta->sale_price ? "Rp ".number_format($products[3]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[3]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[3]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_arrivel_item weidth_2 mix men women">
-                            <img src="{{url('winter/img/arrivel/arrivel_1.png')}}" alt="#">
+                        <div class="single_arrivel_item width_2 mix men women">
+                            <img src="{{url('/uploads/'.$products[4]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[4]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[4]->slug)}}"><h3>{{$products[4]->name}}</h3></a>
+                                <h5>{{$products[4]->meta->sale_price ? "Rp ".number_format($products[4]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[4]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[4]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_arrivel_item weidth_1 mix shoes men">
-                            <img src="{{url('winter/img/arrivel/arrivel_6.png')}}" alt="#">
+                        <div class="single_arrivel_item width_1 mix shoes men">
+                            <img src="{{url('/uploads/'.$products[5]->meta->image_1)}}" alt="#">
                             <div class="hover_text">
-                                <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
-                                <div class="rate_icon">
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                    <a href="#"> <i class="fas fa-star"></i> </a>
-                                </div>
-                                <h5>$150</h5>
+                                <p>{{$products[5]->meta->category->name}}</p>
+                                <a href="{{url('/products/'.$products[5]->slug)}}"><h3>{{$products[5]->name}}</h3></a>
+                                <h5>{{$products[5]->meta->sale_price ? "Rp ".number_format($products[5]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[5]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="#"><i class="ti-heart"></i></a>
-                                    <a href="#"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add/'.$products[5]->id)}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -198,34 +140,9 @@ $product_category = ProductCategory::get();
     <section class="shipping_details section_padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_shopping_details">
-                        <img src="{{url('winter/img/icon/icon_1.png')}}" alt="">
-                        <h4>Free shipping</h4>
-                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_shopping_details">
-                        <img src="{{url('winter/img/icon/icon_2.png')}}" alt="">
-                        <h4>Free shipping</h4>
-                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_shopping_details">
-                        <img src="{{url('winter/img/icon/icon_3.png')}}" alt="">
-                        <h4>Free shipping</h4>
-                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single_shopping_details">
-                        <img src="{{url('winter/img/icon/icon_4.png')}}" alt="">
-                        <h4>Free shipping</h4>
-                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
-                    </div>
-                </div>
+                @foreach($widgets as $widget)
+                    {!!$widget->widget!!}
+                @endforeach
             </div>
         </div>
     </section>

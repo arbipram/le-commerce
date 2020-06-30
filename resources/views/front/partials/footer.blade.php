@@ -1,3 +1,9 @@
+@php
+    $categories = App\Models\ProductCategory::get();
+    $store_settings = App\Models\StoreSetting::get();
+    $settings = App\Models\Setting::get();
+@endphp
+
 <!--::footer_part start::-->
 <footer class="footer_part">
         <div class="container">
@@ -5,12 +11,11 @@
                 <div class="col-sm-6 col-lg-2">
                     <div class="single_footer_part">
                         <h4>Category</h4>
+                        @foreach($categories as $category)
                         <ul class="list-unstyled">
-                            <li><a href="#">Male</a></li>
-                            <li><a href="#">Female</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Fashion</a></li>
+                            <li><a href="{{url('/products/category/'.$category->slug)}}">{{$category->name}}</a></li>
                         </ul>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-2">
@@ -28,9 +33,10 @@
                     <div class="single_footer_part">
                         <h4>Address</h4>
                         <ul class="list-unstyled">
-                            <li><a href="#">200, Green block, NewYork</a></li>
-                            <li><a href="#">+10 456 267 1678</a></li>
-                            <li><span>contact89@winter.com</span></li>
+                            <li><a href="#">{{$store_settings->where('meta_key','address_1')->first()->meta_value}}</a></li>
+                            <li><a href="#">{{$store_settings->where('meta_key','address_2')->first()->meta_value}}</a></li>
+                            <li><a href="tel:{{$store_settings->where('meta_key','phone_no')->first()->meta_value}}">{{$store_settings->where('meta_key','phone_no')->first()->meta_value}}</a></li>
+                            <li><a href="mailto:{{$store_settings->where('meta_key','email')->first()->meta_value}}">{{$store_settings->where('meta_key','email')->first()->meta_value}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,9 +56,9 @@
                             </form>
                         </div>
                         <div class="social_icon">
-                            <a href="#"><i class="ti-facebook"></i></a>
-                            <a href="#"><i class="ti-twitter-alt"></i></a>
-                            <a href="#"><i class="ti-instagram"></i></a>
+                            <a href="{{$settings->where('meta_key','facebook')->first()->meta_value}}"><i class="ti-facebook"></i></a>
+                            <a href="{{$settings->where('meta_key','youtube')->first()->meta_value}}"><i class="ti-youtube"></i></a>
+                            <a href="{{$settings->where('meta_key','instagram')->first()->meta_value}}"><i class="ti-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -60,9 +66,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="copyright_text">
-                        <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                        <P>{!!$settings->where('meta_key','footer')->first()->meta_value!!}</P>
                     </div>
                 </div>
             </div>
