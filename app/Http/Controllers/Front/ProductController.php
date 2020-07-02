@@ -18,6 +18,10 @@ class ProductController extends Controller
         
         $query = \DB::table('products')->select('products.*','product_meta.*','products.id as pid')->join('product_meta','products.id','product_meta.products_id');
         
+        if($request->keyword != null){
+            $data['products'] = $query->where('name','like','%'.$request->keyword.'%')->get();
+        }
+
         if($request->max_price != null){
             $data['products'] = $query->whereBetween('regular_price', [$request->min_price, $request->max_price])->get();
         }

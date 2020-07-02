@@ -2,6 +2,7 @@
     $categories = App\Models\ProductCategory::get();
     $store_settings = App\Models\StoreSetting::get();
     $settings = App\Models\Setting::get();
+    $pages = App\Models\Page::get();
 @endphp
 
 <!--::footer_part start::-->
@@ -22,10 +23,10 @@
                     <div class="single_footer_part">
                         <h4>Company</h4>
                         <ul class="list-unstyled">
-                            <li><a href="">About</a></li>
-                            <li><a href="">News</a></li>
-                            <li><a href="">FAQ</a></li>
-                            <li><a href="">Contact</a></li>
+                            @foreach($pages as $page)
+                            <li><a href="{{url('/page/'.$page->slug)}}">{{$page->title}}</a></li>
+                            @endforeach
+                            <li><a href="{{url('/contact')}}">Contact</a></li>
                         </ul>
                     </div>
                 </div>

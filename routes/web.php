@@ -110,3 +110,4 @@ Route::get('/cart/delete/{id}','Front\CartController@delete');
 Route::get('/checkout','Front\CheckoutController@index');
 Route::post('/checkout/store','Front\CheckoutController@store');
 Route::get('/confirmation','Front\ConfirmationController@index');
+Route::get('/page/{slug}','Front\PageController@index');
