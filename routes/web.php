@@ -100,6 +100,8 @@ Route::get('/','Front\HomeController@index');
 Route::get('/login','Front\LoginController@index');
 Route::get('/tracking','Front\TrackingController@index');
 Route::get('/contact','Front\ContactController@index');
+Route::post('/contact/store','Front\ContactController@store');
+Route::post('/contact/newsletter','Front\ContactController@newsletter');
 Route::get('/products','Front\ProductController@index');
 Route::get('/products/{slug}','Front\ProductController@detail');
 Route::get('/products/category/{slug}','Front\ProductController@category');

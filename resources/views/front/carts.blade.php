@@ -68,9 +68,9 @@
                 </tr>
                 @endforeach
             @csrf
-            <tr class="bottom_button">
-                <td>
-                    </td>
+                <tr class="bottom_button">
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td>
@@ -78,6 +78,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td>
@@ -92,7 +93,7 @@
             </table>
             <div class="checkout_btn_inner float-right">
             <a class="btn_1" href="{{url('/')}}">Continue Shopping</a>
-            <a class="btn_1 checkout_btn_1" href="{{url('/checkout')}}">Proceed to checkout</a>
+            <a class="btn_1" href="{{url('/checkout')}}">Proceed to checkout</a>
             </div>
         </div>
         </div>
