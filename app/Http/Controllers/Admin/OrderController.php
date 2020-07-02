@@ -44,7 +44,7 @@ class OrderController extends Controller
     {
         $order_id = Order::latest()->first()->id;
         $id = (int) $order_id + 1;
-        $order_no = "#Order ".date("Ymd",strtotime($request->order["date"])).$id;
+        $order_no = "Order".date("Ymd",strtotime($request->order["date"])).$id;
         
         \DB::beginTransaction();
         try {
@@ -127,7 +127,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $order_no = "#Order ".date("Ymd",strtotime($request->order["date"])).$id;
+        $order_no = "Order".date("Ymd",strtotime($request->order["date"])).$id;
         \DB::beginTransaction();
         try {
             //mengembalikan stock

@@ -49,7 +49,7 @@ class ProductController extends Controller
         //get product category
         $category = ProductCategory::where('slug',$slug)->first();
 
-        $query = \DB::table('products')->join('product_meta','products.id','product_meta.products_id')->where('categories',$category->id);
+        $query = \DB::table('products')->select('products.*','product_meta.*','products.id as pid')->join('product_meta','products.id','product_meta.products_id')->where('categories',$category->id);
         
         if($request->max_price != null){
             $data['products'] = $query->whereBetween('regular_price', [$request->min_price, $request->max_price])->get();

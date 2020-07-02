@@ -27,6 +27,7 @@
     <section class="cat_product_area section_padding border_top">
         <div class="container">
             <div class="row">
+                @include('sweet::alert')
                 <div class="col-lg-3">
                     <div class="left_sidebar_area">
                         <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
@@ -95,7 +96,7 @@
                                     <img src="{{asset('/uploads/'.$product->image_1)}}" height="200px" width="200px">
                                     <div class="category_social_icon">
                                         <ul>
-                                            <li><a href="#"><i class="ti-bag"></i></a></li>
+                                            <li><a href="{{url('/cart/add?product='.$product->pid.'&qty=1')}}"><i class="ti-bag"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="category_product_text">

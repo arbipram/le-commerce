@@ -31,7 +31,7 @@
                 <th scope="col">Product</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
+                <th scope="col">Subtotal</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -81,7 +81,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <h5>Subtotal</h5>
+                        <h5>Total</h5>
                     </td>
                     <td>
                         <h5>Rp. {{number_format(Cart::getSubTotal(),0,',','.')}}</h5>

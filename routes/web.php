@@ -108,4 +108,5 @@ Route::get('/cart/add','Front\CartController@store');
 Route::get('/cart/update','Front\CartController@update');
 Route::get('/cart/delete/{id}','Front\CartController@delete');
 Route::get('/checkout','Front\CheckoutController@index');
-Route::get('/checkout/store','Front\CheckoutController@store');
+Route::post('/checkout/store','Front\CheckoutController@store');
+Route::get('/confirmation','Front\ConfirmationController@index');
