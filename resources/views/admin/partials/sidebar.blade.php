@@ -114,6 +114,18 @@
                         Scripts
                     </a>
                 </li>
+                <li>
+                   <a href="{{url('admin/contacts')}}" class="@if(Request::segment(2)=='contacts') mm-active @else @endif">
+                        <i class="metismenu-icon pe-7s-file"></i>
+                        Contact
+                    </a>
+                </li>
+                <li>
+                   <a href="{{url('admin/newsletters')}}" class="@if(Request::segment(2)=='newsletters') mm-active @else @endif">
+                        <i class="metismenu-icon pe-7s-file"></i>
+                        Newsletter
+                    </a>
+                </li>
                 <li class="app-sidebar__heading">Settings</li>
                 <li>
                    <a href="{{url('admin/users')}}" class="@if(Request::segment(2)=='users') mm-active @else @endif">

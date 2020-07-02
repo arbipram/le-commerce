@@ -45,6 +45,20 @@ Route::get('/admin/banners/edit/{id}','Admin\BannerController@edit');
 Route::post('/admin/banners/update/{id}','Admin\BannerController@update');
 Route::get('/admin/banners/delete/{id}','Admin\BannerController@destroy');
 
+Route::get('/admin/contacts','Admin\ContactController@index');
+Route::get('/admin/contacts/create','Admin\ContactController@create');
+Route::post('/admin/contacts/store','Admin\ContactController@store');
+Route::get('/admin/contacts/edit/{id}','Admin\ContactController@edit');
+Route::post('/admin/contacts/update/{id}','Admin\ContactController@update');
+Route::get('/admin/contacts/delete/{id}','Admin\ContactController@destroy');
+
+Route::get('/admin/newsletters','Admin\NewsletterController@index');
+Route::get('/admin/newsletters/create','Admin\NewsletterController@create');
+Route::post('/admin/newsletters/store','Admin\NewsletterController@store');
+Route::get('/admin/newsletters/edit/{id}','Admin\NewsletterController@edit');
+Route::post('/admin/newsletters/update/{id}','Admin\NewsletterController@update');
+Route::get('/admin/newsletters/delete/{id}','Admin\NewsletterController@destroy');
+
 Route::get('/admin/medias','Admin\MediaController@index');
 Route::get('/admin/medias/create','Admin\MediaController@create');
 Route::post('/admin/medias/store','Admin\MediaController@store');
