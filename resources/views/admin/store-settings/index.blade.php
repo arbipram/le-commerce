@@ -62,6 +62,10 @@
                                         <label class="">Email</label>
                                         <input name="meta[email]" value="{{$general->where('meta_key','email')->first() ? $general->where('meta_key','email')->first()->meta_value : ''}}" type="text" class="form-control">
                                     </div>
+                                    <div class="position-relative form-group">
+                                        <label class="">Maps</label>
+                                        <textarea name="meta[maps]" cols="30" rows="4" class="form-control">{{$general->where('meta_key','maps')->first() ? $general->where('meta_key','maps')->first()->meta_value : ''}}</textarea>
+                                    </div>
                                 @csrf
                                 <button type="submit" class="btn btn-success">Save Changes</button>
                                 </form>
@@ -77,12 +81,6 @@
                                             <form action="{{url('admin/store/settings/store')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="type" value="product-general">
-                                                <h5>Product Page</h5>
-                                                <br>
-                                                <div class="position-relative form-group">
-                                                    <label class="">Max Product Image</label>
-                                                    <input name="meta[max_product_image]" value="{{$product->where('type','product-general')->where('meta_key','max_product_image')->first() ? $product->where('type','product-general')->where('meta_key','max_product_image')->first()->meta_value : ''}}" type="text" class="form-control">
-                                                </div>
                                                 <h5>Measurement</h5>
                                                 <br>
                                                 <div class="position-relative form-group">

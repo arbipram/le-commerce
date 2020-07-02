@@ -61,6 +61,7 @@ $product_category = ProductCategory::get();
         </div>
         <div class="container-fluid">
             <div class="row">
+                @include('sweet::alert')
                 <div class="col-lg-12">
                     <div class="new_arrival_iner filter-container">
                         <div class="single_arrivel_item width_1 mix shoes">
@@ -70,7 +71,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[0]->slug)}}"><h3>{{$products[0]->name}}</h3></a>
                                 <h5>{{$products[0]->meta->sale_price ? "Rp ".number_format($products[0]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[0]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[0]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[0]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +82,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[1]->slug)}}"><h3>{{$products[1]->name}}</h3></a>
                                 <h5>{{$products[1]->meta->sale_price ? "Rp ".number_format($products[1]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[1]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[1]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[1]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +93,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[2]->slug)}}"><h3>{{$products[2]->name}}</h3></a>
                                 <h5>{{$products[2]->meta->sale_price ? "Rp ".number_format($products[2]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[2]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[2]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[2]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +104,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[3]->slug)}}"><h3>{{$products[3]->name}}</h3></a>
                                 <h5>{{$products[3]->meta->sale_price ? "Rp ".number_format($products[3]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[3]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[3]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[3]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +115,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[4]->slug)}}"><h3>{{$products[4]->name}}</h3></a>
                                 <h5>{{$products[4]->meta->sale_price ? "Rp ".number_format($products[4]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[4]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[4]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[4]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +126,7 @@ $product_category = ProductCategory::get();
                                 <a href="{{url('/products/'.$products[5]->slug)}}"><h3>{{$products[5]->name}}</h3></a>
                                 <h5>{{$products[5]->meta->sale_price ? "Rp ".number_format($products[5]->meta->sale_price,0,',','.') : "Rp. ".number_format($products[5]->meta->regular_price,0,',','.') }}</h5>
                                 <div class="social_icon">
-                                    <a href="{{url('/cart/add/'.$products[5]->id)}}"><i class="ti-bag"></i></a>
+                                    <a href="{{url('/cart/add?product='.$products[5]->id.'&qty=1')}}"><i class="ti-bag"></i></a>
                                 </div>
                             </div>
                         </div>

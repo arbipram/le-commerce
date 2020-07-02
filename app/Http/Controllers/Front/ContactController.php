@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\StoreSetting;
 
-class TrackingController extends Controller
+class ContactController extends Controller
 {
     public function index(Request $request)
     {
-        return view('front.tracking');
+        $data['settings'] = StoreSetting::get();
+        return view('front.contact',$data);
     }
 }

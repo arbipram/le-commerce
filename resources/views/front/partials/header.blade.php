@@ -14,8 +14,18 @@
                     <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" href="{{url('/')}}">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/products')}}">Shop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/tracking')}}">Tracking Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('/contact')}}">Contact</a>
+                            </li>
+                            <!-- dropdown example
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,45 +36,13 @@
                                     <a class="dropdown-item" href="single-product.html">product details</a>
                                     
                                 </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    pages
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="login.html"> 
-                                        login
-                                        
-                                    </a>
-                                    <a class="dropdown-item" href="tracking.html">tracking</a>
-                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                    <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                    <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                    <a class="dropdown-item" href="elements.html">elements</a>
-                                </div>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    blog
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="blog.html"> blog</a>
-                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                </div>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
+                            </li> 
+                            -->
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
-                        <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div>
+                            <a href="{{url('/carts')}}">
                                 <i class="ti-bag"></i>
                             </a>
                             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">

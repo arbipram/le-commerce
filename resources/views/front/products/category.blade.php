@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <p>Home / Products</p>
+                            <p>Home / Products / Category</p>
                         </div>
                     </div>
                 </div>
@@ -22,6 +22,7 @@
         </div>
     </section>
     <!-- breadcrumb start-->
+
     <!--================Products Product Area =================-->
     <section class="cat_product_area section_padding border_top">
         <div class="container">
@@ -46,7 +47,7 @@
                         
                         <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                             <div class="l_w_title">
-                                <h3>Filter</h3>
+                                <h3>Price Filter</h3>
                             </div>
                             <div class="widgets_inner">
                                 <div>
@@ -75,11 +76,15 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
-                    @include('sweet::alert')
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu product_bar_item">
-                                    <h2>All Products</h2>
+                                    @php
+                                        $category = \App\Models\ProductCategory::find($products[0]->categories);
+                                    @endphp
+                                    <h2>
+                                        {{$category->name}}
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -90,18 +95,18 @@
                                     <img src="{{asset('/uploads/'.$product->image_1)}}" height="200px" width="200px">
                                     <div class="category_social_icon">
                                         <ul>
-                                            <li><a href="{{url('/cart/add?product='.$product->pid.'&qty=1')}}"><i class="ti-bag"></i></a></li>
+                                            <li><a href="#"><i class="ti-bag"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="category_product_text">
                                         <a href="{{url('/products/'.$product->slug)}}"><h5>{{$product->name}}</h5></a>
                                         <p>Rp. 
-                                            @if(!empty($product->sale_price))
-                                            <strike>{{number_format($product->regular_price,0,',','.')}}</strike>
-                                            {{number_format($product->sale_price,0,',','.')}}
-                                            @else
-                                            {{number_format($product->regular_price,0,',','.')}}
-                                            @endif
+                                        @if(!empty($product->sale_price))
+                                        <strike>{{number_format($product->regular_price,0,',','.')}}</strike>
+                                        {{number_format($product->sale_price,0,',','.')}}
+                                        @else
+                                        {{number_format($product->regular_price,0,',','.')}}
+                                        @endif
                                         </p>
                                     </div>
                                 </div>

@@ -24,4 +24,6 @@
     <link rel="stylesheet" href="{{url('winter/css/price_rangs.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{url('winter/css/style.css')}}">
+    <!-- Swal -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>

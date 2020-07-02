@@ -13,7 +13,7 @@
 
 <!-- particles js -->
 <script src="{{url('winter/js/owl.carousel.min.js')}}"></script>
-<script src="{{url('winter/js/jquery.nice-select.min.js')}}"></script>
+<!-- <script src="{{url('winter/js/jquery.nice-select.min.js')}}"></script> -->
 <!-- slick js -->
 <script src="{{url('winter/js/slick.min.js')}}"></script>
 <script src="{{url('winter/js/jquery.counterup.min.js')}}"></script>
@@ -27,3 +27,6 @@
 <script src="{{url('winter/js/price_rangs.js')}}"></script>
 <!-- custom js -->
 <script src="{{url('winter/js/custom.js')}}"></script>
+
+<!-- swal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
