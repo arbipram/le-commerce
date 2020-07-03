@@ -26,6 +26,7 @@
                             @foreach($pages as $page)
                             <li><a href="{{url('/page/'.$page->slug)}}">{{$page->title}}</a></li>
                             @endforeach
+                            <li><a href="{{url('/payment-confirmation')}}">Payment Confirmation</a></li>
                             <li><a href="{{url('/contact')}}">Contact</a></li>
                         </ul>
                     </div>

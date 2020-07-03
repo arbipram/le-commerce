@@ -74,7 +74,9 @@
                     <td></td>
                     <td></td>
                     <td>
+                    @if (\Cart::getContent()->count() > 0)
                         <button class="btn_1">Update Cart</button>
+                    @endif
                     </td>
                 </tr>
                 <tr>

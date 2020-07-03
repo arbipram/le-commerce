@@ -9,7 +9,7 @@
                         <i class="pe-7s-note2 icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Orders
+                    <div>Payment Confirmations
                         <div class="page-title-subheading">
                         </div>
                     </div>
@@ -18,7 +18,7 @@
         </div>           
         <div class="row">
             <div class="col-md-9 mb-3">
-                <a href="{{url('/admin/orders/create')}}" class="btn btn-success">Create</a>
+                <a href="{{url('/admin/payment-confirmations/create')}}" class="btn btn-success">Create</a>
             </div>
         </div>
         <div class="row">
@@ -29,25 +29,29 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Order</th>
+                                    <th>Order No</th>
                                     <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
+                                    <th>Email</th>
+                                    <th>Bank</th>
+                                    <th>Amount</th>
+                                    <th>File</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($orders))
-                                    @foreach($orders as $i => $order)
+                                @if(!empty($payment_confirmations))
+                                    @foreach($payment_confirmations as $i => $payment_confirmation)
                                     <tr>
                                         <td> {{$i+1}}</td>
-                                        <td> {{$order->name}}</td>
-                                        <td> {{$order->date}}</td>
-                                        <td> {{$order->status}}</td>
-                                        <td> {{$order->total_sales}}</td>
+                                        <td> {{$payment_confirmation->order_no}}</td>
+                                        <td> {{$payment_confirmation->created_at}}</td>
+                                        <td> {{$payment_confirmation->email}}</td>
+                                        <td> {{$payment_confirmation->bank}}</td>
+                                        <td> {{$payment_confirmation->amount}}</td>
+                                        <td> <img src="{{url('/uploads/'.$payment_confirmation->file)}}" alt="" width="100px" height="100px"> </td>
                                         <td>
-                                            <a href="{{url('/admin/orders/edit/'.$order->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="{{url('/admin/orders/delete/'.$order->id)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/admin/payment-confirmations/edit/'.$payment_confirmation->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="{{url('/admin/payment-confirmations/delete/'.$payment_confirmation->id)}}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

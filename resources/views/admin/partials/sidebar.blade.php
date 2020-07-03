@@ -47,6 +47,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{url('admin/payment-confirmations')}}" class="@if(Request::segment(2)=='payment-confirmations') mm-active @else @endif">
+                        <i class="metismenu-icon pe-7s-note2"></i>
+                        Payment Confirmations
+                    </a>
+                </li>
+                <li>
                     <a href="{{url('admin/customers')}}" class="@if(Request::segment(2)=='customers') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-users"></i>
                         Customers

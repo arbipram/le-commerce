@@ -115,6 +115,13 @@ Route::group([
     Route::post('orders/store','Admin\OrderController@store');
     Route::post('orders/update/{id}','Admin\OrderController@update');
     Route::get('orders/delete/{id}','Admin\OrderController@destroy');
+
+    Route::get('payment-confirmations','Admin\PaymentConfirmationController@index');
+    Route::get('payment-confirmations/create','Admin\PaymentConfirmationController@create');
+    Route::get('payment-confirmations/edit/{id}','Admin\PaymentConfirmationController@edit');
+    Route::post('payment-confirmations/store','Admin\PaymentConfirmationController@store');
+    Route::post('payment-confirmations/update/{id}','Admin\PaymentConfirmationController@update');
+    Route::get('payment-confirmations/delete/{id}','Admin\PaymentConfirmationController@destroy');
 });
 
 Route::get('/','Front\HomeController@index');
@@ -134,3 +141,5 @@ Route::get('/checkout','Front\CheckoutController@index');
 Route::post('/checkout/store','Front\CheckoutController@store');
 Route::get('/confirmation','Front\ConfirmationController@index');
 Route::get('/page/{slug}','Front\PageController@index');
+Route::get('/payment-confirmation','Front\PaymentConfirmationController@index');
+Route::post('/payment-confirmation/store','Front\PaymentConfirmationController@store');
