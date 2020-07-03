@@ -98,7 +98,7 @@ class DashboardController extends Controller
             $data["orders"] = Order::take('10')->get();
 
             $data['filter'] = $request->filter;
-            $data['filter_text'] = "Month ".date("F",strtotime($request->month));
+            $data['filter_text'] = "Bulan ".date("F",strtotime($request->month));
             $data['select_filter'] = $request->month;
         }
 

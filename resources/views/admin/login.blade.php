@@ -22,6 +22,7 @@
     <!--================login_part Area =================-->
     <section class="login_part section_padding">
         <div class="container">
+        @include('sweet::alert')
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_text text-center">
@@ -39,7 +40,7 @@
                                 Please Sign in now</h3>
                             <form class="row contact_form" action="{{url('/admin/login/auth')}}" method="post">
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="name" name="name" value=""
+                                <input type="email" class="form-control" id="name" name="email" value=""
                                 placeholder="Username">
                             </div>
                             <div class="col-md-12 form-group p_star">
