@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\PaymentConfirmation;
+use App\Models\StoreSetting;
 use SweetAlert;
 
 class PaymentConfirmationController extends Controller
 {
     public function index()
     {
-        return view('front.payment-confirmation');
+        $data['store_settings'] = StoreSetting::get();  
+        return view('front.payment-confirmation',$data);
     }
 
     public function store(Request $request)

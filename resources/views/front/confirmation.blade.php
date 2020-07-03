@@ -108,6 +108,32 @@
                   <th scope="col" colspan="3"></th>
                   <th scope="col">Total : Rp. {{number_format($order->total_sales,0,',','.')}}</th>
                 </tr>
+                <tr>
+                  <th>Note :</th>
+                </tr>
+                <tr>
+                  <td>
+                    @if($order->payment_method == "Cash On Delivery")                    
+                    <div class="payment_item">
+                        <p>
+                            {!!$store_settings->where('meta_key','address_cod')->first()->meta_value!!}
+                        </p>
+                    </div>
+                    @endif
+                    @if($order->payment_method == "Direct Bank Transfer")
+                    <div class="payment_item">
+                        <p>
+                            Please, Transfer to : <br>
+                            @foreach($banks as $i => $bank)
+                                {{$bank->meta_value}} a/n
+                                {{$account_name[$i]->meta_value}} <br>
+                                No Rek : {{$account_number[$i]->meta_value}}<br><br>
+                            @endforeach
+                        </p>
+                    </div>
+                    @endif
+                  </td>
+                </tr>
               </tfoot>
             </table>
           </div>
