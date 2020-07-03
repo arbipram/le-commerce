@@ -42,8 +42,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order_id = Order::latest()->first()->id;
-        $id = (int) $order_id + 1;
+        $order_id = Order::latest()->first();
+        if($order_id == null){
+            $id = 1 ;
+        } else {
+            $id = (int) $order_id->id + 1;
+        }
         $order_no = "Order".date("Ymd",strtotime($request->order["date"])).$id;
         
         \DB::beginTransaction();

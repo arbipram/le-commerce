@@ -53,12 +53,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('admin/report')}}" class="@if(Request::segment(2)=='report') mm-active @else @endif">
-                        <i class="metismenu-icon pe-7s-news-paper"></i>
-                        Reports
-                    </a>
-                </li>
-                <li>
                     <a href="{{url('admin/store/settings')}}" class="@if(Request::segment(2)=='store' && Request::segment(3)=='settings') mm-active @else @endif">
                         <i class="metismenu-icon pe-7s-settings"></i>
                         Settings
