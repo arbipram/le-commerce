@@ -93,7 +93,9 @@
             </table>
             <div class="checkout_btn_inner float-right">
             <a class="btn_1" href="{{url('/')}}">Continue Shopping</a>
+            @if (\Cart::getContent()->count() > 0)
             <a class="btn_1" href="{{url('/checkout')}}">Proceed to checkout</a>
+            @endif
             </div>
         </div>
         </div>
