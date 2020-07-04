@@ -42,6 +42,7 @@ class BannerController extends Controller
         foreach($request->meta as $meta => $value){
             $banner->$meta = $value;
         };
+
         if ($request->hasFile('meta')) {
             $image = $request->meta['image'];
             $imageName = Str::random(30).'.'.$image->getClientOriginalExtension();

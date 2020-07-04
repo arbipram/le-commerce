@@ -2,8 +2,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>winter</title>
-    <link rel="icon" href="{{url('winter/img/favicon.png')}}">
+    <title>{{\App\Models\Setting::where('meta_key','site_title')->first()->meta_value}} | {{\App\Models\Setting::where('meta_key','tag_line')->first()->meta_value}}</title>
+    <link rel="icon" href="{{\App\Models\Setting::where('meta_key','logo')->first()->meta_value}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('winter/css/bootstrap.min.css')}}">
     <!-- animate CSS -->

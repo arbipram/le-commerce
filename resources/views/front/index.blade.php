@@ -36,7 +36,7 @@ $product_category = ProductCategory::get();
                 @foreach($product_category as $category)
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_feature_post_text">
-                        <img src="{{url('uploads/'.$category->image)}}" alt="#">
+                        <img src="{{url('uploads/'.$category->image)}}" alt="" height="600px" width="600px">
                         <div class="hover_text">
                             <a href="{{url('/products/category/'.$category->slug)}}" class="btn_2">Shop For {{$category->name}}</a>
                         </div>
