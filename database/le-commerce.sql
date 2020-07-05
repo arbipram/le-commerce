@@ -12,11 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for laravel_ecommerce
-DROP DATABASE IF EXISTS `laravel_ecommerce`;
-CREATE DATABASE IF NOT EXISTS `laravel_ecommerce` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `laravel_ecommerce`;
-
 -- Dumping structure for table laravel_ecommerce.banners
 DROP TABLE IF EXISTS `banners`;
 CREATE TABLE IF NOT EXISTS `banners` (
